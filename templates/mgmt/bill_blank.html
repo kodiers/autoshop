@@ -1,0 +1,102 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    {% block title %}Просмотр счета{% endblock %}
+</head>
+{% block content %}
+    <!-- Bill blank page -->
+<body>
+<div style="width: 700px;">
+<table border="1" width="700px">
+    <tr>
+        <td>
+            <small>Внимание! Оплата данного счета означает согласие с условиями поставки товаров.</small>
+        </td>
+    </tr>
+</table>
+<br>
+<table border="1" width="700px">
+    <tr>
+        <td colspan="4">{{ company_info.bank_name }}</td>
+        <td>БИК</td>
+        <td>{{ company_info.bik }}</td>
+    </tr>
+    <tr>
+        <td colspan="4"><small>Банк получателя</small></td>
+        <td rowspan="2">СЧ. №</td>
+        <td rowspan="2">{{ company_info.kor_account }}</td>
+    </tr>
+    <tr>
+        <td>ИНН</td>
+        <td>{{ company_info.inn }}</td>
+        <td>КПП</td>
+        <td>{{ company_info.kpp }}</td>
+    </tr>
+    <tr>
+        <td colspan="4">{{ company_info.company_name }}</td>
+        <td rowspan="2">СЧ. №</td>
+        <td rowspan="2">{{ company_info.account }}</td>
+    </tr>
+    <tr>
+        <td colspan="4"><small>Получатель</small></td>
+    </tr>
+</table>
+<br>
+<h1 align="center">Счет на оплату № {{ bill.pk }} от {{ bill.created_date }}.</h1>
+<br>
+<table border="1" width="700px">
+    <tr>
+        <td>Поставщик</td>
+        <td>
+            {{ company_info.company_name }}, ИНН {{ company_info.inn }}, КПП {{ company_info.kpp }}, {{ company_info.reg_data }}, <br>
+            {{ company_info.law_address }}
+        </td>
+    </tr>
+</table>
+<br>
+<table border="1" width="700px">
+    <tr>
+        <td>Покупатель</td>
+        <td>
+            {{ client.law_data }}<br>{{ client.law_address }}
+        </td>
+    </tr>
+</table>
+<br>
+<table border="1" width="700px">
+    <tr>
+        <th>№</th>
+        <th>Товар</th>
+        <th>Кол-во</th>
+        <th>Ед.</th>
+        <th>Цена</th>
+        <th>Сумма</th>
+    </tr>
+    {% for detail in orders_details %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ detail.goods_pn }}&nbsp;{{ detail.goods }}</td>
+            <td>{{ detail.quantity }}</td>
+            <td>{{ detail.meassure }}</td>
+            <td>{{ detail.goods_price }}</td>
+            <td>{{ detail.total_goods_price }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br>
+<h3 align="right">Итого:&nbsp;{{ order.order_sum }}&nbsp;рублей</h3>
+<h3 align="right">В том числе НДС:&nbsp;{{ nds }}&nbsp;рублей</h3>
+<br>
+<h4>{{ summ_text|capfirst }}</h4>
+<hr>
+<h3 align="right">Генеральный директор:____________________________ &nbsp;{{ company_info.ceo }}</h3>
+<h3 align="right">Главный бухгалтер:_________________________&nbsp;{{ company_info.buh }}</h3>
+</div>
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,90 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show export goods list -->
+    <div class="container">
+        <div class="col-xs-12">
+            <div style="text-align: right; margin-top: 20px">
+                <a href="{% url 'export-goods-new' %}" class="btn btn-primary">Выгрузить остатки</a>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>Выгрузка товарных остатков</h1>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th style="width: 70%; text-align: center">Название</th>
+                        <th style="width: 20%; text-align: center">Дата</th>
+                        <th style="width: 10%"></th>
+                    </tr>
+                    {% for object in object_list %}
+                        <tr>
+                            <td style="width: 70%"><a href="{{ object.url }}"> {{ object.title }}</a></td>
+                            <td style="width: 20%">{{ object.date }}</td>
+                            <td style="width: 10%"><a href="{% url 'export-delete' object.pk %}" class="btn btn-danger">Удалить</a> </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End export goods list -->
+    <!-- Begin pagination -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12" style="text-align: center">
+                {% if paginator.num_pages > 1 %}
+                    <nav>
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li>
+                                    <a href="/mgmt/export-goods-list?page=1">
+                                        <span aria-hidden="true">В начало</span>
+                                        <span class="sr-only">В начало</span>
+                                    </a>
+                                </li>
+                                <li>
+                                        <span aria-hidden="true">...</span>
+                                </li>
+                                <li>
+                                    <a href="/mgmt/export-goods-list?page={{ page_obj.previous_page_number }}">
+                                        <span aria-hidden="true">{{ page_obj.previous_page_number }}</span>
+                                        <span class="sr-only">{{ page_obj.previous_page_number }}</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="active">
+                                <a href="#">Страница {{ page_obj.number }} из {{ paginator.num_pages }} <span class="sr-only"></span></a>
+                            </li>
+                            {% if page_obj.has_next %}
+                                <li>
+                                    <a href="/mgmt/export-goods-list?page={{ page_obj.next_page_number }}">
+                                        <span aria-hidden="true">{{ page_obj.next_page_number }}</span>
+                                        <span class="sr-only">{{ page_obj.next_page_number }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                        <span aria-hidden="true">...</span>
+                                </li>
+                                <li>
+                                    <a href="/mgmt/export-goods-list?page={{ paginator.num_pages }}">
+                                        <span aria-hidden="true">В конец</span>
+                                        <span class="sr-only">В конец</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- End pagination -->
+{% endblock %}

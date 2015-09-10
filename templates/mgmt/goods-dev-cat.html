@@ -1,0 +1,63 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Developers and goods category list -->
+    <div class="container">
+        <div class="row" style="margin-top: 20px">
+        <!-- Developers list -->
+            <div class="col-xs-6">
+                <a href="{% url 'dev-new' %}" class="btn btn-primary">Добавить производителя</a>
+                <hr>
+                <br>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1>Производители</h1>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th style="width: 80%">Название</th>
+                            <th style="width: 20%"></th>
+                        </tr>
+                        {% for developer in developers %}
+                            <tr>
+                                <td style="width: 80%"><a href="{% url 'dev-edit' developer.pk %}"> {{ developer.title }}</a></td>
+                                <td style="width: 20%"><a href="{% url 'dev-delete' developer.pk %}" class="btn btn-danger">Удалить</a> </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <!-- End developers list -->
+            <!-- Goods category list -->
+            <div class="col-xs-6">
+                <a href="{% url 'cat-new' %}" class="btn btn-primary">Добавить категорию</a>
+                <hr>
+                <br>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1>Категории</h1>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th style="width: 80%">Название</th>
+                            <th style="width: 20%"></th>
+                        </tr>
+                        {% for category in categories %}
+                            <tr>
+                                <td style="width: 80%"><a href="{% url 'cat-edit' category.pk %}"> {{ category.title }}</a></td>
+                                <td style="width: 20%"><a href="{% url 'cat-delete' category.pk %}" class="btn btn-danger">Удалить</a> </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End goods category list -->
+{% endblock %}

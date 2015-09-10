@@ -1,0 +1,91 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Step 2. Choose delivery and payment method. -->
+    <div class="col-xs-10" style="background-color: #FFFFFF">
+        <div class="row">
+            <div class="col-xs-8">
+                <h1>Оформление заказа шаг № 2</h1>
+            </div>
+            <div class="col-xs-4">
+                <h2><a href="{% url 'basket' %}" class="btn btn-primary">Вернуться в корзину</a></h2>
+            </div>
+        </div>
+        {%  if error %}
+            <h2>{{ error }}</h2>
+        {% endif %}
+        <div class="row">
+            <div class="col-xs-12">
+                <h4>Общая сумма заказа:&nbsp;{{ total_summ }}</h4>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-xs-12">
+
+                <h4>Выберите способ доставки и оплаты:</h4>
+                <hr>
+                <form action="{% url 'choose-pays' %}" method="post">
+                    {% csrf_token %}
+                <div class="row">
+                    <div class="col-xs-3">
+                        {{ form.delivery_method.label }}
+                    </div>
+                    <div class="col-xs-3">
+                        {{ form.delivery_method }}
+                    </div>
+                    <div class="col-xs-6">
+                        <table class="table">
+                            <tr>
+                                <th>Название метода</th>
+                                <th>Описание</th>
+                            </tr>
+                            {% for method in dev_methods %}
+                            <tr>
+                                <td>{{ method.title }}</td>
+                                <td>{{ method.description|safe }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                    <hr>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            {{ form.payment_method.label }}
+                        </div>
+                        <div class="col-xs-3">
+                            {{ form.payment_method }}
+                        </div>
+                        <div class="col-xs-6">
+                            <table class="table">
+                                <tr>
+                                    <th>Название метода</th>
+                                    <th>Описание</th>
+                                </tr>
+                                {% for method in payments_methods %}
+                                <tr>
+                                    <td>{{ method.title }}</td>
+                                    <td>{{ method.description }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Продолжить оформление" class="btn btn-success" style="margin-bottom: 20px">
+                </form>
+            </div>
+
+        </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+#encoding=utf-8
+# © Victor Yamchinov 2015.
+# version 0.0.3a
+
+Django==1.7
+Pillow==2.7.0
+django-ckeditor==4.4.7
+xlwt3==0.1.2
+xlrd==0.9.3
+django-braces==1.4
+xlwt-future==0.8.0
+xlsxwriter==0.6.7
+django-robokassa-payments==1.3
+django-easy-watermark==0.1.7

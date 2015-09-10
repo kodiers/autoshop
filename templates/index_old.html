@@ -1,0 +1,62 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "base.html" %}
+{% load webdesign %}
+{% load staticfiles %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Товары по акции</h1>
+            </div>
+        </div>
+        <div class="row">
+        <!-- Stock goods block -->
+            {% for stock_good in stock_goods %}
+                <div class="col-xs-4">
+                    <h2>{{ stock_good.title }}</h2>
+                    <p>{{ stock_good.description }}</p>
+                    <br>
+                    <em>{{ stock_good.stock_price }}</em>
+                    <br>
+                    <button class="btn-default" type="button">Купить</button>
+                </div>
+            {% endfor %}
+        <!-- END STOCK goods block -->
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+            <!-- Popular goods block -->
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h1>Популярные товары</h1></div>
+                    <table class="table">
+                        <tr>
+                            <th># п/п</th>
+                            <th>Артикул</th>
+                            <th>Название</th>
+                            <th>Срок поставки</th>
+                            <th>Количество</th>
+                            <th>Цена</th>
+                        </tr>
+                        <!-- Table content -->
+                        {% for pop_good in popular_goods %}
+                            <tr>
+                                <td> {{ pop_good.pk }} </td>
+                                <td> {{ pop_good.partnumber }} </td>
+                                <td> {{ pop_good.title }}</td>
+                                <td> {{ pop_good.delivery_time }} </td>
+                                <td> {{ pop_good.remainder }} </td>
+                                <td> {{ pop_good.price }} </td>
+                            </tr>
+                        {% endfor %}
+                        <!-- END TABLE CONTENT -->
+                    </table>
+                </div>
+            <!-- end popular block -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,130 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Shows categories list in front -->
+
+<div class="col-xs-10" style="background-color: #FFFFFF">
+    <div class="row">
+        <div class="col-xs-12" style="padding: 10px">
+            <h1>Производитель {{ developer }}</h1>
+            {% for object in categories %}
+            <a href="{% url 'front_cat_dev_goods' developer.pk object.pk %}">{{ object.title }}</a>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
+        <div class="row">
+            <table class="table table-condensed">
+                <tr id="tr_style">
+                    <td id="td_pp">
+                        <p>
+                            №<br>п/п
+                        </p>
+                    </td>
+                    <td id="td_articul">
+                        <p>
+                            Артикул
+                        </p>
+                    </td>
+                    <td id="td_name">
+                        <p>
+                            Наименование
+                        </p>
+                    </td>
+                    <td id="td_time">
+                        <p>
+                            Срок поставки
+                        </p>
+                    </td>
+                    <td id="td_kolvo">
+                        <p>
+                            Количество шт.
+                        </p>
+                    </td>
+                    <td id="td_price">
+                        <p>
+                            Цена руб.
+                        </p>
+                    </td>
+                    <td></td>
+                    <td id="td_button">
+                        <p>
+                        </p>
+                    </td>
+                </tr>
+                {% for good in goods %}
+                    <tr id="tr_style">
+                        <td id="td_pp">
+                            <p>
+                                <input class="good_pk" value="{{ good.pk }}">{{ good.pk }}
+                            </p>
+                        </td>
+                        <td id="td_articul">
+                            <p>
+                                {{ good.partnumber }}
+                            </p>
+                        </td>
+                        <td id="td_name">
+                            <p>
+                                {{ good.title }}
+                            </p>
+                        </td>
+                        <td id="td_time">
+                            <p>
+                                {{ good.delivery_time }}
+                            </p>
+                        </td>
+                        <td id="td_kolvo">
+                            {% if good.remainder <= 0 %}
+                                <!-- If good.remainder < 0 show it with anoher color -->
+                                <p style="color: #ff0000">
+                                    {{ good.remainder }}
+                                </p>
+                            {% else %}
+                                <p>{{ good.remainder }}</p>
+                            {% endif %}
+                        </td>
+                        <td id="td_price">
+                            <p>
+                                {% if client_category != None %}
+                                    {%  if client_category.code == 'ip' %}
+                                        {{ good.price_ip }}
+                                    {% elif client_category.code == 'ltd' %}
+                                        {{ good.price_org }}
+                                    {% else %}
+                                        {{ good.price }}
+                                    {% endif %}
+                                {% else %}
+                                    {{ good.price }}
+                                {% endif %}
+                            </p>
+                        </td>
+                        <td id="td_photo">
+                            {% if good.image != '' %}
+                            <a name="modal" href="#dialog"><img style="width: 100%" src={% static 'images/photo.png' %}></a>
+                            {% else %}
+                            <img style="width: 100%" src={% static 'images/nonphoto.png' %}>
+                            {% endif %}
+                        </td>
+                        <td id="td_button">
+                            <form action="{% url 'basket' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ good.pk }}" name="good_id">
+                                <input type="submit" value="В корзину" name="tocart">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+</div>
+
+
+
+{% endblock %}

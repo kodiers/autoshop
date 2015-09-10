@@ -1,0 +1,38 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Управление страницами сайта.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- List all FAQ's questions -->
+    <div class="container">
+        <div class="col-xs-12">
+            <div style="text-align: right">
+                <a href="{% url 'faq-new' %}" class="btn btn-primary">Добавить вопрос</a>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>Помощь</h1>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th style="width: 70%">Вопрос</th>
+                        <th style="width: 15%">Дата изменения</th>
+                        <th style="width: 15%"></th>
+                    </tr>
+                    {% for object in object_list %}
+                        <tr>
+                            <td style="width: 70%"><a href="{% url 'faq-edit' object.pk %}">{{ object.question }}</a></td>
+                            <td style="width: 15%">{{ object.modified_date }}</td>
+                            <td style="width: 15%"><a href="{% url 'faq-delete' object.pk %}" class="btn btn-danger">Удалить</a> </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

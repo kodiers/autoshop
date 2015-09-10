@@ -1,0 +1,34 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Add goods to developer  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                    <h1>Добавить товары к производителю {{ object.title }}</h1>
+                {% if error %}
+                    <h3>{{ error }}</h3>
+                {% endif %}
+                <form action="." method="post">
+                    <ul>
+                        {% csrf_token %}
+                        <input type="hidden" name="object_id" value="{{ object.pk }}">
+                        {% for good in goods %}
+                            <li>
+                                <input type="checkbox" name="goods" value="{{ good.pk }}">{{ good.partnumber }}&nbsp;{{ good.title }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                    <input type="submit" value="Добавить" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

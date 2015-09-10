@@ -1,0 +1,33 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Администрирование.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show clients category list -->
+    <div class="container">
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>Категории цены</h1>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Название</th>
+                        <!-- <th></th> -->
+                    </tr>
+                    {% for object in object_list %}
+                        <tr>
+                            <td><a href="{% url 'client-price-cat-edit' object.pk %}"> {{ object.title }}</a></td>
+                            <!-- <td><a href="#" class="btn btn-danger">Удалить</a> </td> -->
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End -->
+{% endblock %}

@@ -1,0 +1,49 @@
+
+.link {color:#fff; text-decoration:none}
+.link:hover {color:#fff; text-decoration:underline}
+#mask {
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:9000;
+    background-color:#000;
+    display:none;
+}
+#boxes .window {
+    position:absolute;
+    left:0;
+    top:0;
+    width:840px;
+    display:none;
+    z-index:9999;
+    padding: 20px;
+    overflow: hidden;
+}
+#boxes #dialog {
+    width:840px;
+    padding:10px;
+    background-color:#ffffff;
+}
+.top {
+    position:absolute;
+    margin-left: 600px;
+    margin-top: -80px;
+    width:370px;
+    height:30px;
+}
+.content {
+    padding-top: 35px;
+}
+.modalHead {
+    background-color: #f4f4f4;
+    padding-left: 40px;
+}
+.modalDesc {
+    background-color: #f4f4f4;
+}
+.cont {
+    width: 800px;
+}
+.cont .row {
+    margin-left: 0;
+}

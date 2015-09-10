@@ -1,0 +1,101 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <div class="col-xs-10" style="background-color: #ffffff">
+        <!--<div class="row">-->
+            <!--<div class="col-xs-12">-->
+                <!--<h1>Корзина {{ client.title }}</h1>-->
+            <!--</div>-->
+        <!--</div>-->
+        {%  if error %}
+            <h2>{{ error }}</h2>
+        {% endif %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <h2>Товары в корзине</h2>
+                    </div>
+                    <div class="col-xs-4">
+                        <h2>
+                            <a href="{% url 'index' %}" class="btn btn-primary">Продолжить покупки</a>
+                        </h2>
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <tr id="tr_style">
+                        <th >№</th>
+                        <th id="td_name">Артикул<br>Наименование</th>
+                        <!--<th id="td_name">Название</th>-->
+                        <th>Ед.</th>
+                        <th style="text-align: center">Количество шт.</th>
+                        <th id="td_price" style="text-align: center">Цена руб.</th>
+                        <th id="td_price" style="text-align: center">Цена по акции</th>
+                        <th id="td_price" style="text-align: center">Итого руб.</th>
+                        <th></th>
+                    </tr>
+                    {% for basket in baskets %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td><span style="font-style: italic"><b>{{ basket.good_pn }}</b></span><br>
+                                {{ basket.good }}</td>
+                            <!--<td>{{ basket.good }}</td>-->
+                            <td>{{ basket.meassure }}</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-xs-3" style="padding-left: 15px">
+                                        <form action="." method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ basket.pk }}" name="substitute_id">
+                                            <input style="width: 20px" type="submit" class="btn btn-default btn-xs" value="-">
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-6" style="text-align: center">
+                                        {{ basket.quantity }}
+                                    </div>
+                                    <div class="col-xs-3" style="margin-left: -20px">
+                                        <form action="." method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ basket.pk }}" name="add_id">
+                                            <input style="width: 20px" type="submit" class="btn btn-default btn-xs" value="+">
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ basket.good_price }}</td>
+                            <td>
+                                {% if basket.stock_price == 0 %}
+                                    N/A
+                                {% else %}
+                                    {{ basket.stock_price }}
+                                {% endif %}
+                            </td>
+                            <td>{{ basket.total_price }}</td>
+                            <th>
+                                <form action="." method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{ basket.pk }}" name="delete_id">
+                                    <input type="submit" class="btn btn-danger" value="Удалить">
+                                </form>
+                            </th>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <h4>Общая сумма:&nbsp;{{ total_summ }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                {% if baskets %}
+                    <a href="{% url 'preview-order' %}" class="btn btn-success" style="margin-bottom: 20px">Оформить заказ</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

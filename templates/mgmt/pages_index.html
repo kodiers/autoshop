@@ -1,0 +1,46 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление страницами сайта.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show list of pages section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Страницы сайта</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <h2>О компании</h2>
+                <a href="{% url 'aboutcompany-edit' about_company.pk %}" class="btn btn-primary">Изменить</a>
+            </div>
+            <div class="col-xs-4">
+                <h2>Поставщикам</h2>
+                <a href="{% url 'forsuppliers-edit' supplier.pk %}" class="btn btn-primary">Изменить</a>
+            </div>
+            <div class="col-xs-4">
+                <h2>Доставка и оплата</h2>
+                <a href="{% url 'deliveryinfo-edit' delivery.pk %}" class="btn btn-primary">Изменить</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <h2>Помощь</h2>
+                <a href="{% url 'faq-edit-list' %}" class="btn btn-primary">Изменить</a>
+            </div>
+            <div class="col-xs-4">
+                <h2>Контакты</h2>
+                <a href="{% url 'contacts-edit' contact.pk %}" class="btn btn-primary">Изменить</a>
+            </div>
+            <div class="col-xs-4">
+                <h2>Страницы</h2>
+                <a href="{% url 'pages-list' %}" class="btn btn-primary">Изменить</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

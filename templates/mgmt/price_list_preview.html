@@ -1,0 +1,94 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% load tags %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Previe price list  page -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1>Предварительный просмотр прайс листа</h1>
+                    </div>
+                    <div class="panel-body">
+                    <form action="{% url 'price-list-parse' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ pricelist.file }}" name="file">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <p>{{ pricelist.file }}</p>
+                                </div>
+                                <div class="col-xs-7">
+                                    <div style="text-align: right">
+                                    <label for="markup">Наценка</label>
+                                    <input type="number" name="markup" id="markup">&nbsp&nbsp%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <p>{{ pricelist.date }}</p>
+                                </div>
+                                <div class="col-xs-7">
+                                    <div style="text-align: right">
+                                    <label for="delivery">Доставка</label>
+                                    <input type="number" name="delivery" id="delivery">&nbspдн.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <p><b>{{ pricelist.supplier }}</b></p>
+                                </div>
+                                <div class="col-xs-7">
+                                    <div style="text-align: right">
+                                    <label for="price_ip">Скидка для {{ price_ip.title }}</label>
+                                    <input type="number" name="price_ip" id="price_ip">&nbsp&nbsp%
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-7 col-xs-offset-5">
+                                    <div style="text-align: right">
+                                    <label for="price_ltd">Скидка для {{ price_ltd.title }} </label>
+                                    <input type="number" name="price_ltd" id="price_ltd">&nbsp&nbsp%
+                                        </div>
+                                </div>
+                            </div>
+                        <!-- Parsed data from file -->
+
+                            <table class="table" style="margin-top: 40px">
+                                {% for head in header %}
+                                    <th>
+                                        <h5><b>{{ head }}</b></h5>
+                                    </th>
+                                {% endfor %}
+                                {% for row in data_rows %}
+                                    <tr>
+                                        {% for cell in row %}
+                                            <td>{{ cell }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            <a href="{% url 'price-list-delete' pricelist.pk %}" class="btn btn-danger">Отменить</a>
+                            <input type="submit" class="btn btn-success" value="Загрузить">
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

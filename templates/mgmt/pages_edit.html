@@ -1,0 +1,72 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление страницами сайта.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Create or edit page -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                {% if 'pages_new' in request.path %}
+                    <h1>Добавить страницу</h1>
+                {% else %}
+                    <h1>Редактировать страницу</h1>
+                {% endif %}
+                <form action="." method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.media }}
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.title.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.title }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.url.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.url }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.content.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.content }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.image.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.image }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.modified_date.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.modified_date }}
+                        </div>
+                    </div>
+                    <br>
+                    <input type="submit" value="Сохранить" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

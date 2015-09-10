@@ -1,0 +1,50 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление страницами сайта.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- edit FAQ answer page -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                    <h1>Редактировать вопрос</h1>
+                <form action="." method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.question.label }}
+                        </div>
+                        <div class="col-xs-10 form_title_ok_width">
+                            {{ form.question }}
+                        </div>
+                    </div>
+                        {{ form.media }}
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.answer.label }}
+                        </div>
+                        <div class="col-xs-10 form_title">
+                            {{ form.answer }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.modified_date.label }}
+                        </div>
+                        <div class="col-xs-10 ">
+                            {{ form.modified_date }}
+                        </div>
+                    </div>
+                    <br>
+                    <input type="submit" value="Сохранить" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

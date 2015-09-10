@@ -1,0 +1,23 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!--  Developers list for our store functionality -->
+
+<div class="col-xs-10">
+        <div class="row">
+            <div class="col-xs-12" style=" padding: 10px">
+                <h1>Список производителей</h1>
+                {% for object in object_list %}
+                <a href="{% url 'front_cat_list' object.pk %}">{{ object.title }}</a>
+                <br>
+                {% endfor %}
+            </div>
+        </div>
+</div>
+{% endblock %}

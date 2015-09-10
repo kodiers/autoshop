@@ -1,0 +1,161 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show goods list -->
+    <div class="col-xs-10" style="background-color: #f1f1f1">
+        <div class="panel-heading">
+            <h1>Результаты поиска</h1>
+        </div>
+        
+        {% if object_list %}
+            <table class="table table-condensed">
+                <tr id="tr_style">
+                    <td id="td_pp">
+                        <p>
+                            №<br>п/п
+                        </p>
+                    </td>
+                    <td id="td_articul">
+                        <p>
+                            Артикул
+                        </p>
+                    </td>
+                    <td id="td_name">
+                        <p>
+                            Наименование
+                        </p>
+                    </td>
+                    <td id="td_time">
+                        <p>
+                            Срок поставки
+                        </p>
+                    </td>
+                    <td id="td_kolvo">
+                        <p>
+                            Количество шт.
+                        </p>
+                    </td>
+                    <td id="td_price">
+                        <p>
+                            Цена руб.
+                        </p>
+                    </td>
+                    <td id="td_button">
+                        <p>
+                        </p>
+                    </td>
+                </tr>
+                {% for object in object_list %}
+                    <tr id="tr_style">
+                        <td id="td_pp">
+                            <p>
+                                <input class="good_pk" value="{{ object.pk }}">{{ object.pk }}
+
+                            </p>
+                        </td>
+                        <td id="td_articul">
+                            <p>
+                                {{ object.partnumber }}
+                            </p>
+                        </td>
+                        <td id="td_name">
+                            <p>
+                                {{ object.title }}
+                            </p>
+                        </td>
+                        <td id="td_time">
+                            <p>
+                                {{ object.delivery_time }}
+                            </p>
+                        </td>
+                        <td id="td_kolvo">
+                            {% if object.remainder <= 0 %}
+                                <!-- If good.remainder < 0 show it with anoher color -->
+                                <p style="color: #ff0000">
+                                    {{ object.remainder }}
+                                </p>
+                            {% else %}
+                                <p>{{ object.remainder }}</p>
+                            {% endif %}
+                        </td>
+                        <td id="td_price">
+                            <p>
+                                {% if client_category != None %}
+                                    {%  if client_category.code == 'ip' %}
+                                        {{ object.price_ip }}
+                                    {% elif client_category.code == 'ltd' %}
+                                        {{ object.price_org }}
+                                    {% else %}
+                                        {{ object.price }}
+                                    {% endif %}
+                                {% else %}
+                                    {{ object.price }}
+                                {% endif %}
+                            </p>
+                        </td>
+                        <td id="td_photo">
+                            {% if object.image != '' %}
+                            <a name="modal" href="#dialog"><img style="width: 100%" src={% static 'images/photo.png' %}></a>
+                            {% else %}
+                            <img style="width: 100%" src={% static 'images/nonphoto.png' %}>
+                            {% endif %}
+                        </td>
+                        <td id="td_button">
+                            <form action="{% url 'basket' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ object.pk }}" name="good_id">
+                                <input type="submit" value="В корзину" name="tocart">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <h4>Ничего не найдено</h4>
+        {% endif %}
+
+        <!-- Begin pagination -->
+        <!--<div class="container">-->
+            <div class="row" style="text-align: center">
+                <div class="col-xs-12" style="text-align: center">
+                    {% if object_list.paginator.num_pages > 1 %}
+                    <nav>
+                        <ul class="pagination">
+                            {% for page in object_list.paginator.page_range %}
+                            {% if page < object_list.number %}
+                            <li>
+                                <a href="/search?page={{ page }}">
+                                    <span aria-hidden="true">{{ page }}</span>
+                                    <span class="sr-only">{{ page }}</span>
+                                </a>
+                            </li>
+                            {% elif page == object_list.number%}
+                            <li class="active">
+                                <a href="#">{{ page }} <span class="sr-only">{{ page }}</span></a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="/search?page={{ page }}">
+                                    <span aria-hidden="true">{{ page }}</span>
+                                    <span class="sr-only">{{ page }}</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
+            <!--</div>-->
+        </div>
+        <!-- End pagination -->
+
+    </div>
+
+{% endblock %}

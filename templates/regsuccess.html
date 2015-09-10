@@ -1,0 +1,10 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load webdesign %}
+{% block content %}
+    <h1>Поздравляем! Вы зарегистрировались!</h1>
+    <p>Для завершения регистрации необходимо зайти в <a href="{% url 'lk' %}">Личный кабинет</a> </p>
+{% endblock %}

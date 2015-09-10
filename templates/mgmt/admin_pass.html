@@ -1,0 +1,86 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление заказами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Create or edit users  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-1">
+                        <h1><a href="{% url 'user-list' %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span></a></h1>
+                    </div>
+                    <div class="col-xs-11">
+                        <h1>Изменить данные пользователя</h1>
+                    </div>
+                </div>
+            <hr>
+                {% if error %}
+                    <h3>{{ error }}</h3>
+                {% endif %}
+                <div class="row">
+                    <div class="col-xs-3">
+                        <h4>Логин: {{ user.username }}</h4>
+                    </div>
+                    <div class="col-xs-9">
+                        <a href="{% url 'admin-pass' user.pk %}" class="btn btn-primary">Изменить пароль</a>
+                    </div>
+                </div>
+            <hr>
+                <form action="." method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label>Логин:&nbsp;</label>
+                        </div>
+                        <div class="col-xs-9">
+                            {{ form.username }}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label>Email:&nbsp;</label>
+                        </div>
+                        <div class="col-xs-9">
+                            {{ form.email }}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label>Суперпользователь:&nbsp;</label>
+                        </div>
+                        <div class="col-xs-9">
+                            {{ form.is_superuser }}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label>Группа:&nbsp;</label>
+                        </div>
+                        <div class="col-xs-9">
+                            {{ form.group }}
+                        </div>
+                    </div>
+                    <br>
+                    <div style="display: none">{{ form.password }}</div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <input type="submit" value="Сохранить" class="btn btn-success">
+                        </div>
+                    </div>
+
+                </form>
+                <br>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

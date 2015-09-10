@@ -1,0 +1,13 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-xs-10" style="background-color: #ffffff">
+    <form action="{{ form.target }}" method="POST">
+        <p>{{ form.as_p }}</p>
+        <p><input type="submit" value="Купить"></p>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,114 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load webdesign %}
+{% block content %}
+    <!-- Template for organizations registration -->
+    <div class="col-xs-10" style="background-color: #ffffff">
+        <div class="content">
+        {% if errors %}
+        <h3 style="color: #ff0000;"> Возникли ошибки при заполнении формы. Попробуйте еще раз</h3>
+        <p>{{ errors }}</p>
+        {% endif %}
+        <h1>Пожалуйста зарегистрируйтесь</h1>
+        <a href="{% url 'reg' %}" class="btn btn-primary">Регистрация для физических лиц</a>
+        <hr>
+        <form action="." method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-xs-4">
+                    <p>Введите Вашу электронную почту:</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>{{ form.email }}</p>
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <p>Введите ваш логин:</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>{{ form.login }}</p>
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <p>Введите Ваш пароль:</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>{{ form.password1 }}</p>
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <p>Подтвердите пароль:</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>{{ form.password2 }}</p>
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <p>Введите название организации:</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>{{ form.title }}</p>
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <p>Введите контактный телефон:</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>{{ form.phone }}</p>
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <p>Контактное лицо:</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>{{ form.contact_name }}</p>
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <p>Введите банковские реквизиты для формирования счетов:</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>{{ form.law_data }}</p>
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <p>Введите юридический адрес:</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>{{ form.law_address }}</p>
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+
+                </div>
+                <div class="col-xs-10">
+                    <input type="submit" value="Зарегистрироваться" class="btn btn-success" style="width: 175px; margin-bottom: 20px">
+                </div>
+            </div>
+            
+        </form>
+    </div>
+    </div>
+
+{% endblock %}

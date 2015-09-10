@@ -1,0 +1,26 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Администрирование.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Delete delivery method -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Вы действительно хотите удалить {{ object }}</h1>
+                <form action="." method="post">
+                    <ul>
+                        {% csrf_token %}
+                        {{ form.as_ul }}
+                    </ul>
+                    <input type="submit" value="Удалить" class="btn btn-danger">
+                    <a class="btn btn-primary" href="{% url 'delivery-list' %}">Отмена</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

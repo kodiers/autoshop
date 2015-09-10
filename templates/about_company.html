@@ -1,0 +1,27 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- About company -->
+    <div class="col-xs-10">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>{{ page_about.title }}</h1>
+                <p>{{ page_about.content|safe }}</p>
+                <h2>Банковские реквизиты: </h2>
+                <p>Банк: {{ page_about.bank_name }}</p>
+                <p>Бик: {{ page_about.bik }}</p>
+                <p>КПП: {{ page_about.kpp }}</p>
+                <p>Кореспондентский счет: {{ page_about.kor_account }}</p>
+                <p>Банковский счет: {{ page_about.account }}</p>
+                <p>Сведения о регистрации: {{ page_about.reg_data }}</p>
+                <p>Юридический адрес: {{ page_about.law_address }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

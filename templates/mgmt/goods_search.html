@@ -1,0 +1,107 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show goods list -->
+    <div class="container">
+        <div class="col-xs-12">
+            <div class="row" style="margin-top: 20px">
+                <div class="col-xs-6" style="text-align: left">
+                    <a href="{% url 'goods-list' %}" class="btn btn-primary">К списку товаров</a>
+                </div>
+                <div class="col-xs-6" style="text-align: right">
+                    <a href="{% url 'goods-new' %}" class="btn btn-primary">Добавить товар</a>
+                </div>
+            </div>
+            <hr>
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <h1>Товары</h1>
+                        </div>
+                        <div class="col-xs-10">
+                            <form class="navbar-form" role="search" action="{% url 'goods-mgmt-search' %}" method="post">
+                                {% csrf_token %}
+
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="text" class="form-control" placeholder="Поиск" name="word" style="width: 100%">
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <button type="submit" class="btn btn-default form-control">Поиск</button>
+                                        </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                    <table class="table">
+                        <tr>
+                            <th>Артикул</th>
+                            <th>Название</th>
+                            <th>Остаток</th>
+                            <th>Стоимость</th>
+                            <th>Цена</th>
+                            <th>Цена по акции</th>
+                            <th></th>
+                        </tr>
+                        {% for object in object_list %}
+                            <tr>
+                                <td><a href="{% url 'goods-edit' object.pk %}"> {{ object.partnumber }}</a></td>
+                                <td>{{ object.title }}</td>
+                                <td style="text-align: center">{{ object.remainder }}</td>
+                                <td style="text-align: right">{{ object.cost }}</td>
+                                <td style="text-align: right">{{ object.price }}</td>
+                                <td style="text-align: right">{{ object.stock_price }}</td>
+                                <td><a href="{% url 'goods-delete' object.pk %}" class="btn btn-danger">Удалить</a> </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+            </div>
+        </div>
+    </div>
+    <!-- End goods list -->
+    <!-- Begin pagination -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12" style="text-align: center">
+                {% if object_list.paginator.num_pages > 1 %}
+                    <nav>
+                        <ul class="pagination">
+                            {% for page in object_list.paginator.page_range %}
+                                {% if page < object_list.number %}
+                                    <li>
+                                        <a href="/mgmt/goods-search?page={{ page }}">
+                                            <span aria-hidden="true">{{ page }}</span>
+                                            <span class="sr-only">{{ page }}</span>
+                                        </a>
+                                    </li>
+                                    {% elif page == object_list.number%}
+                                    <li class="active">
+                                        <a href="#">{{ page }} <span class="sr-only">{{ page }}</span></a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="/mgmt/goods-search?page={{ page }}">
+                                            <span aria-hidden="true">{{ page }}</span>
+                                            <span class="sr-only">{{ page }}</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- End pagination -->
+{% endblock %}

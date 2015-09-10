@@ -1,0 +1,35 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление заказами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Create or edit bill  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                    <h1>Изменить счет</h1>
+                {% if error %}
+                    <h3>{{ error }}</h3>
+                {% endif %}
+                <form action="." method="post">
+                    <ul>
+                        {% csrf_token %}
+                        {{ form.bill_status.label }}
+                        {{ form.bill_status }}
+                        <br>
+                        {{ form.comments.label }}
+                        {{ form.comments }}
+                    </ul>
+                    <br>
+                    <input type="submit" value="Сохранить" class="btn btn-success">
+                </form>
+                <h2>Просмотреть счет</h2>
+                <p><a href="{% url 'bill-show' bill.pk %}" target="_blank">Счет № {{ bill.pk }}</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

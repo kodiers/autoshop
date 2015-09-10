@@ -1,0 +1,123 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "base.html" %}
+{% load webdesign %}
+{% load staticfiles %}
+{% load watermark %}
+{% block title %}Интернет-магазин Синкай авто.{% endblock %}
+{% block content %}
+
+<!-- Content -->
+<div class="col-xs-10" style="background-color: #f1f1f1">
+    <div class="panel-heading"><h1>Популярные товары</h1></div>
+    <table class="table table-bordered table-hover">
+        <tr id="tr_style">
+            <td id="td_pp">
+                <p>
+                    №<br>п/п
+                </p>
+            </td>
+            <td id="td_articul">
+                <p>
+                    Артикул
+                </p>
+            </td>
+            <td id="td_name">
+                <p>
+                    Наименование
+                </p>
+            </td>
+            <td id="td_time">
+                <p>
+                    Срок поставки
+                </p>
+            </td>
+            <td id="td_kolvo">
+                <p>
+                    Количество шт.
+                </p>
+            </td>
+            <td id="td_price">
+                <p>
+                    Цена руб.
+                </p>
+            </td>
+            <!-- Should delete this code -->
+            <td >
+                <p>
+                </p>
+            </td>
+            <!-- end delete this code -->
+            <td id="td_button">
+                <p>
+
+                </p>
+            </td>
+        </tr>
+        <tbody>
+        {% for pop_good in popular_goods %}
+        <tr id="tr_style">
+            <td id="td_pp">
+                <p>
+                    <input class="good_pk" value="{{ pop_good.pk }}">{{ pop_good.pk }}
+                </p>
+            </td>
+            <td id="td_articul">
+                <p>
+                    {{ pop_good.partnumber }}
+                </p>
+            </td>
+            <td id="td_name">
+                <p>
+                    {{ pop_good.title }}
+                </p>
+            </td>
+            <td id="td_time">
+                <p>
+                    {{ pop_good.delivery_time }}
+                </p>
+            </td>
+            <td id="td_kolvo">
+                <p>
+                    {{ pop_good.remainder }}
+                </p>
+            </td>
+            <td id="td_price">
+                <p>
+                    {% if client_category != None %}
+                        {%  if client_category.code == 'ip' %}
+                            {{ pop_good.price_ip }}
+                        {% elif client_category.code == 'ltd' %}
+                            {{ pop_good.price_org }}
+                        {% else %}
+                            {{ pop_good.price }}
+                        {% endif %}
+                    {% else %}
+                        {{ pop_good.price }}
+                    {% endif %}
+                </p>
+            </td>
+            <td id="td_photo">
+                {% if pop_good.image != '' %}
+                    <a name="modal" href="#dialog"><img style="width: 100%" src={% static 'images/photo.png' %}></a>
+                {% else %}
+                    <img style="width: 100%" src={% static 'images/nonphoto.png' %}>
+                {% endif %}
+            </td>
+            <td id="td_button">
+                <form action="{% url 'basket' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ pop_good.pk }}" name="good_id">
+                    <input type="submit" value="В корзину" name="tocart">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Content END -->
+
+{% endblock %}

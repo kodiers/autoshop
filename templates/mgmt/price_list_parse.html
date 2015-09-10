@@ -1,0 +1,21 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% load tags %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show error if couldn't add goods to database -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Загрузка товаров</h1>
+                <h2>{{ errors }}</h2>
+                <a href="{% url 'price-list' %}" class="btn bg-primary">Вернуть к списку прайс листов</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

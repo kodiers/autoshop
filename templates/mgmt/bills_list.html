@@ -1,0 +1,99 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Управление заказами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show bills list -->
+    <div class="container">
+        <div class="col-xs-12">
+            <div class="panel panel-default" style="margin-top: 20px">
+                <div class="panel-heading">
+                    <h1>Счета</h1>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th style="width: 15%; text-align: left">Номер счета</th>
+                        <th style="width: 35%; text-align: left">Клиент</th>
+                        <th style="width: 15%; text-align: left">Номер заказа</th>
+                        <th style="width: 10%; text-align: right">Статус платежа</th>
+                        <th style="width: 10%; text-align: right">Сумма</th>
+                        <th style="width: 15%; text-align: right">Дата изменения</th>
+                        <!--<th></th>-->
+                    </tr>
+                    {% for object in object_list %}
+                        <tr>
+                            <td style="width: 15%; text-align: left"><a href="{% url 'bill-edit' object.pk %}"> {{ object.pk }}</a></td>
+                            <td style="width: 35%; text-align: left">{{ object.client }}</td>
+                            <td style="width: 15%; text-align: left">{{ object.order }}</td>
+                            <td style="width: 10%; text-align: right">{% if object.bill_status == False %}
+                                    Не оплачено
+                                {% else %}
+                                    Оплачено
+                                {% endif %}
+                            </td>
+                            <td style="width: 10%; text-align: right">{{ object.order.order_sum }}</td>
+                            <td style="width: 15%; text-align: right">{{ object.modified_date }}</td>
+                            <!--<td><a href="#" class="btn btn-danger">Удалить</a> </td> Commented for future use-->
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End bills list -->
+    <!-- Begin pagination -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12" style="text-align: center">
+                {% if paginator.num_pages > 1 %}
+                    <nav>
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li>
+                                    <a href="/mgmt/bills-list?page=1">
+                                        <span aria-hidden="true">В начало</span>
+                                        <span class="sr-only">В начало</span>
+                                    </a>
+                                </li>
+                                <li>
+                                        <span aria-hidden="true">...</span>
+                                </li>
+                                <li>
+                                    <a href="/mgmt/bills-list?page={{ page_obj.previous_page_number }}">
+                                        <span aria-hidden="true">{{ page_obj.previous_page_number }}</span>
+                                        <span class="sr-only">{{ page_obj.previous_page_number }}</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="active">
+                                <a href="#">Страница {{ page_obj.number }} из {{ paginator.num_pages }} <span class="sr-only"></span></a>
+                            </li>
+                            {% if page_obj.has_next %}
+                                <li>
+                                    <a href="/mgmt/bills-list?page={{ page_obj.next_page_number }}">
+                                        <span aria-hidden="true">{{ page_obj.next_page_number }}</span>
+                                        <span class="sr-only">{{ page_obj.next_page_number }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                        <span aria-hidden="true">...</span>
+                                </li>
+                                <li>
+                                    <a href="/mgmt/bills-list?page={{ paginator.num_pages }}">
+                                        <span aria-hidden="true">В конец</span>
+                                        <span class="sr-only">В конец</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- End pagination -->
+{% endblock %}

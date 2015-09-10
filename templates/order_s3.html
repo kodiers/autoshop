@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Step 3. final order preview. -->
+    <div class="col-xs-10" style="background-color: #FFFFFF">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="col-xs-8">
+                    <h1>Оформление заказа шаг № 3</h1>
+                </div>
+                <div class="col-xs-4">
+                    <a href="{% url 'basket' %}" class="btn btn-primary" style="margin-top: 20px">Вернуться в корзину</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {%  if error %}
+                <h2>{{ error }}</h2>
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Проверьте правильность вашего заказа</h3>
+                <hr>
+                <table class="table">
+                    <tr>
+                        <th>№</th>
+                        <th style="min-width: 120px">Артикул</th>
+                        <th>Название</th>
+                        <th>Ед. измерения</th>
+                        <th>Количество</th>
+                        <th>Цена</th>
+                        <th>Цена по акции</th>
+                        <th>Итого</th>
+                        <th>Итого со скидкой</th>
+                        <th></th>
+                    </tr>
+                    {% for basket in baskets %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td style="min-width: 120px">{{ basket.good_pn }}</td>
+                            <td>{{ basket.good }}</td>
+                            <td>{{ basket.meassure }}</td>
+                            <td>
+                                {{ basket.quantity }}
+                            </td>
+                            <td>{{ basket.good_price }}</td>
+                            <td>
+                                {% if basket.stock_price == 0 %}
+                                    N/A
+                                {% else %}
+                                    {{ basket.stock_price }}
+                                {% endif %}
+                            </td>
+                            <td>{{ basket.total_price }}</td>
+                            <td>
+                                {% if basket.private_price == 0 %}
+                                    N/A
+                                {% else %}
+                                    {{ basket.private_price }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-6">
+                <h4>Общая сумма заказа:&nbsp;{{ total_summ }}</h4>
+            </div>
+            <div class="col-xs-6">
+                <h4>{{ delivery_message|safe }}</h4>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>Выбранный метод доставки: {{ dev_method }}</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                <h4>Выбранный метода платежа: {{ pay_method }}</h4>
+                    </div>
+            </div>
+        <div class="row">
+            <div class="col-xs-12">
+                {% if dev_method.id_method == 'kur' %}
+                    <form action="{% url 'cash-order' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row" style="margin-top: 20px">
+                            <div class="col-xs-3">
+                                Выше имя:
+                            </div>
+                            <div class="col-xs-4">
+                                <input type="text" name="cl_name" id="cl_name">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 20px">
+                            <div class="col-xs-3">
+                                Выш телефон:
+                            </div>
+                            <div class="col-xs-4">
+                                <input type="text" name="cl_phone" id="cl_phone">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-3">
+                                {{ delivery_form.city.label }}
+                            </div>
+                            <div class="col-xs-4">
+                                {{ delivery_form.city }}
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 20px">
+                            <div class="col-xs-3">
+                                {{ delivery_form.street.label }}
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form_title_ok_width" style="max-width: 400px">
+                                {{ delivery_form.street }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 20px">
+                            <div class="col-xs-3">
+                                {{ delivery_form.home.label }}
+                            </div>
+                            <div class="col-xs-4">
+                                {{ delivery_form.home }}
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 20px">
+                            <div class="col-xs-3">
+                                {{ delivery_form.office.label }}<br>
+                                <small>Не обязательное к заполнению</small>
+                            </div>
+                            <div class="col-xs-4">
+                                {{ delivery_form.office }}
+                            </div>
+                        </div>
+
+                        <input type="submit" value="Оформить заказ" class="btn btn-success" style="margin-top: 20px; margin-bottom: 20px">
+                    </form>
+                {% else %}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form action="{% url 'cash-order' %}" method="post">
+                            {% csrf_token %}
+                            <div class="row" style="margin-top: 20px">
+                                <div class="col-xs-3">
+                                    Выше имя:
+                                </div>
+                                <div class="col-xs-4">
+                                    <input type="text" name="cl_name" id="cl_name">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 20px">
+                                <div class="col-xs-3">
+                                    Выш телефон:
+                                </div>
+                                <div class="col-xs-4">
+                                    <input type="text" name="cl_phone" id="cl_phone">
+                                </div>
+                            </div>
+                            <input type="submit" value="Оформить заказ" class="btn btn-success" style="margin-top: 20px; margin-bottom: 20px">
+                        </form>
+                    </div>
+                </div>
+
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

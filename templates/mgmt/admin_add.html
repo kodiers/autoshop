@@ -1,0 +1,89 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Администрирование.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Create user  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                    <h1>Добавить пользователя</h1>
+                <hr>
+                {% if error %}
+                    <h3>{{ error }}</h3>
+                {% endif %}
+                <form action="." method="post">
+                        {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <p>
+                                Имя пользователя
+                            </p>
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.username }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <p>
+                                Email
+                            </p>
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.email }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <p>
+                                Пароль
+                            </p>
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.password1 }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <p>
+                                Подтверждение
+                            </p>
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.password2 }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <p>
+                                Группа
+                            </p>
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.group }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+
+                        </div>
+                        <div class="col-xs-10">
+                            <input type="submit" value="Сохранить" class="btn btn-success" style="width: 175px;">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

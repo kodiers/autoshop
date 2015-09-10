@@ -1,0 +1,221 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление заказами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Create or edit clients  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <h1>Изменить данные клиента <b>{{ object }}</b></h1>
+                    </div>
+                    <div class="col-xs-4">
+                        <h1><a href="{% url 'change-password' object.pk %}" class="btn btn-primary">Изменить данные учетной записи</a></h1>
+                    </div>
+                </div>
+                <hr>
+                {% if error %}
+                    <h3>{{ error }}</h3>
+                {% endif %}
+                <form action="." method="post">
+                        {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.title.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.title }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.contact_name.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.contact_name }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.contact_address.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title_ok_width">
+                                {{ form.contact_address }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.contact_phone.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.contact_phone }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.contact_email.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.contact_email }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.delivery_zip.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.delivery_zip }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.delivery_city.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.delivery_city }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.delivery_street.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title_ok_width">
+                                {{ form.delivery_street }}
+                            </div>
+                        </div>
+                    </div>
+                         <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.delivery_home.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.delivery_home }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.delivery_office.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.delivery_office }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.preferred_payments.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.preferred_payments }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.law_data.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.law_data }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.law_address.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title_ok_width">
+                                {{ form.law_address }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.private_stock.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.private_stock }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.clients_category.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.clients_category }}
+                        </div>
+                    </div>
+
+                    <ul style="margin-top: 20px">
+                        <hr>
+                        <li>
+                            <b>Количество не оплаченных заказов:  {{ object.unpaid_orders }}</b>
+                        </li>
+                        <li>
+                            <b>Задолженность:  {{ object.unpaid_sum }}</b>
+                        </li>
+                        <li>
+                            <b>Общая сумма заказов: </b> {{ object.orders_sum }}
+                        </li>
+                        <hr>
+                        {% if object.is_org == True %}
+                            <li>
+                                <b>Юридическое лицо:</b> Да
+                            </li>
+                        {% else %}
+                            <li>
+                                <b>Юридическое лицо:</b> Нет
+                            </li>
+                        {% endif %}
+                        <li>
+                            <b>Логин: </b> {{ object.login }}
+                        </li>
+                        <li>
+                            <b>Дата регистрации: </b> {{ object.registration_date }}
+                        </li>
+                    </ul>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+
+                        </div>
+                        <div class="col-xs-10">
+                            <input type="submit" value="Сохранить" class="btn btn-success" style="width: 175px;">
+                        </div>
+                    </div>
+                </form>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

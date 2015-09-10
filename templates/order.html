@@ -1,0 +1,80 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Step 1. Preview order. -->
+    <div class="col-xs-10" style="background-color: #FFFFFF">
+        <div class="row">
+            <div class="col-xs-8">
+                <h1>Оформление заказа шаг № 1</h1>
+            </div>
+            <div class="col-xs-4">
+                <h2>
+                    <a href="{% url 'basket' %}" class="btn btn-primary">Вернуться в корзину</a>
+                </h2>
+            </div>
+        </div>
+        {%  if error %}
+            <h2>{{ error }}</h2>
+        {% endif %}
+        <h2>Размер вашей персональной скидки: &nbsp; {{ client.private_stock }}</h2>
+        <small>Размер скидки не учитывается на товары по акции</small>
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Товары в заказе</h2>
+                <table class="table">
+                    <tr>
+                        <th>№</th>
+                        <th style="min-width: 120px">Артикул</th>
+                        <th>Название</th>
+                        <th>Ед. измерения</th>
+                        <th>Количество</th>
+                        <th>Цена</th>
+                        <th>Цена по акции</th>
+                        <th>Итого</th>
+                        <th>Итого со скидкой</th>
+                        <th></th>
+                    </tr>
+                    {% for basket in baskets %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td style="min-width: 120px">{{ basket.good_pn }}</td>
+                            <td>{{ basket.good }}</td>
+                            <td>{{ basket.meassure }}</td>
+                            <td>
+                                {{ basket.quantity }}
+                            </td>
+                            <td>{{ basket.good_price }}</td>
+                            <td>
+                                {% if basket.stock_price == 0 %}
+                                    N/A
+                                {% else %}
+                                    {{ basket.stock_price }}
+                                {% endif %}
+                            </td>
+                            <td>{{ basket.total_price }}</td>
+                            <td>
+                                {% if basket.private_price == 0 %}
+                                    N/A
+                                {% else %}
+                                    {{ basket.private_price }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <h4>Общая сумма:&nbsp;{{ total_summ }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <a href="{% url 'choose-methods' %}" class="btn btn-success" style="margin-bottom: 20px">Продолжить оформление</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

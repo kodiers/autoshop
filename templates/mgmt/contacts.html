@@ -1,0 +1,98 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление страницами сайта.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- edit page contacts -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                    <h1>Редактировать страницу <b>"Контакты"</b></h1>
+                <hr>
+                <form action="." method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.media }}
+
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.phone.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.phone }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.zip.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.zip }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.address.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.address }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.email.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.email }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.map.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.map }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.comments.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.comments }}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+
+                        </div>
+                        <div class="col-xs-10">
+                            <input type="submit" value="Сохранить" class="btn btn-success" style="width: 175px;">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

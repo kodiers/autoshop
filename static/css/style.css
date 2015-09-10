@@ -1,0 +1,315 @@
+
+@font-face {
+    font-family: Tahoma; /* Гарнитура шрифта */
+    src: url(../fonts/MagistralC.otf); /* Путь к файлу со шрифтом */
+}
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+
+    background-color: #cccccc;
+    font-family: 'Tahoma';
+    font-size: 14px;
+    letter-spacing: 1px;
+
+}
+#middle {
+    background: #cccccc;
+}
+#header {
+}
+div #middle .container .row .col-xs-10 .row .col-xs-12 {
+    background-color: #f1f1f1;
+}
+div #middle .container .row .col-xs-10 .content .row .col-xs-12 {
+    background-color: #f1f1f1;
+}
+.container {
+    min-width: 1200px;
+}
+#logo img {
+
+    width: 100%;
+}
+.menu {
+    background-color: #C12525;
+    min-height: 40px;
+    padding: 15px;
+}
+.menu ul li {
+    display: inline;
+}
+.menu a {
+    color: #FFFFFF;
+}
+
+#menu_1 {
+}
+#menu_1 a {
+    background-image: url('../images/btm1-1.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 40px;
+    display: block;
+}
+#menu_1 a:hover {
+    background-image: url('../images/btm1-2.png');
+}
+#menu_2 {
+}
+#menu_2 a {
+    background-image: url('../images/btm2-1.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 40px;
+    display: block;
+}
+#menu_2 a:hover {
+    background-image: url('../images/btm2-2.png');
+}
+#menu_3 {
+}
+#menu_3 a {
+    background-image: url('../images/btm3-1.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 40px;
+    display: block;
+}  /* картинка сразу */
+#menu_3 a:hover {
+    background-image: url('../images/btm3-2.png');
+}
+#menu_4 {
+}
+#menu_4 a {
+    background-image: url('../images/btm4-1.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 40px;
+    display: block;
+}  /* картинка сразу */
+#menu_4 a:hover {
+    background-image: url('../images/btm4-2.png');
+}
+
+.sidebar_menu {
+    background: transparent;
+    list-style-type: none;
+    /*position: fixed;*/
+    /*width: 165px;*/
+    padding: 0;
+    margin: 0;
+    /*margin-top: 20px;*/
+    /*margin-bottom: 200px;*/
+}
+@media all and (max-height: 700px){
+    .sidebar_menu {
+        position: relative;
+    }
+}
+.sidebar_menu ul {
+    margin-left: 0;
+    padding-left: 0;
+}
+.sidebar_menu ul li {
+    list-style-type: none;
+    color: #FFFFFF;
+    margin-left: 10px;
+}
+.sidebar_menu ul li a {
+    list-style-type: none;
+    color: #FFFFFF;
+    margin-left: 10px;
+}
+#sidebar_menu_1 {
+    /*margin-top: 20px;*/
+}
+#sidebar_menu_1 a {
+    background-image: url('../images/button1-5.png');
+    background-repeat: no-repeat;
+    width: 165px;
+    height: 60px;
+    display: block;
+}  /* картинка сразу */
+#sidebar_menu_1 a:hover {
+    background-image: url('../images/button1-3.png');
+} /* картинка при наведении курсора */
+#sidebar_menu_2 {
+    margin-top: 1px;
+}
+#sidebar_menu_2 a {
+    background-image: url('../images/button2-1.png');
+    background-repeat: no-repeat;
+    width: 165px;
+    /*height: 60px;*/
+    display: block;
+}  /* картинка сразу */
+#sidebar_menu_2 a:hover {
+    background-image: url('../images/button2-2.png');
+} /* картинка при наведении курсора */
+#sidebar_menu_3 {
+    margin-top: 1px;
+}
+#sidebar_menu_3 a {
+    background-image: url('../images/button3-1.png');
+    background-repeat: no-repeat;
+    width: 165px;
+    height: 60px;
+    display: block;
+}
+#sidebar_menu_3 a:hover {
+    background-image: url('../images/button3-2.png');
+}
+#sidebar_menu_4 {
+    margin-top: 1px;
+}
+#sidebar_menu_4 a {
+    background-image: url('../images/button4-1.png');
+    background-repeat: no-repeat;
+    width: 165px;
+    height: 60px;
+    display: block;
+}
+#sidebar_menu_4 a:hover {
+    background-image: url('../images/button4-2.png');
+}
+#sidebar_menu_5 {
+    margin-top: 1px;
+}
+#sidebar_menu_5 a {
+    background-image: url('../images/button5-1.png');
+    background-repeat: no-repeat;
+    width: 165px;
+    height: 60px;
+    display: block;
+}
+#sidebar_menu_5 a:hover {
+    background-image: url('../images/button5-2.png');
+}
+
+.content {
+    border-color: #C12525;
+
+}
+#search_div {
+    border-color: #C12525;
+    padding: 0;
+    margin: 0;
+}
+#search_div p {
+    margin-left: 10px;
+}
+#search {
+    padding: 10px;
+    margin: 10px;
+    border-color: #C12525;
+    border-radius: 5px;
+    border-width: 5px;
+    width: 100%;
+}
+#search_submit {
+    margin-left: -30px;
+    border-color: #C12525;
+    border-radius: 5px;
+}
+#search_result {
+
+}
+#search_result div p {
+    border-width: 1px;
+    border-style: dashed;
+}
+#tr_style {
+    text-align: center;
+}
+#td_pp {
+    display: none;
+}
+#td_articul {
+    text-align: left;
+    max-width: 500px;
+}
+#td_name {
+    text-align: left;
+    min-width: 290px;
+}
+#td_time {
+    max-width: 80px;
+}
+#td_kolvo {
+    max-width: 100px;
+}
+#td_kolvo button {
+    border-radius: 3px;
+    user-focus-pointer: no;
+}
+#td_kolvo button:focus {
+    outline: 0;
+}
+#td_photo {
+    width: 50px;
+}
+#td_price {
+    max-width: 80px;
+}
+#td_button {
+    max-width: 80px;
+}
+#td_button button {
+    border-radius: 3px;
+}
+#td_button button:focus {
+    outline: 0;
+}
+input[name="tocart"] {
+    background: url("../images/tocart.png") center;
+    background-size: cover;
+    padding: 5px;
+    text-indent: -9999px;
+    width: 40px;
+
+}
+.footer {
+    background-color: #818181;
+    color: #FFFFFF;
+    bottom: 0;
+}
+.footer div p {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+#studio a {
+    color: black;
+    margin-left: 20px;
+}
+div .content .input-group {
+    padding-top: 20px;
+}
+
+.form_title input {
+     width: 800px;
+}
+.form_title select {
+    width: 420px;
+}
+.form_title_ok_width textarea {
+     width: 800px;
+     height: 26px;
+ }
+.form_title_ok_width-x52 textarea {
+    width: 800px;
+    height: 52px;
+}
+.form_title_ok_width700 textarea{
+    width: 700px;
+    height: 26px;
+}
+.form_title textarea {
+    width: 800px;
+}

@@ -1,0 +1,186 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление страницами сайта.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- edit page about company -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                    <h1>Редактировать страницу <b>"О компании"</b></h1>
+                <hr>
+                <form action="." method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.media }}
+
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <p>
+                                Заголовок страницы
+                            </p>
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.title }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <p>
+                                Содержание страницы
+                            </p>
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.content }}
+                        </div>
+                    </div>
+                        <hr>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.bank_name.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title_ok_width">
+                                {{ form.bank_name }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.inn.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.inn }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.kpp.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.kpp }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.bik.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.bik }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.company_name.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title_ok_width">
+                                {{ form.company_name }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.kor_account.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.kor_account }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.account.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.account }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.reg_data.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title_ok_width">
+                                {{ form.reg_data }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.law_address.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title_ok_width">
+                                {{ form.law_address }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.ceo.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title_ok_width">
+                                {{ form.ceo }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.buh.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title_ok_width">
+                                {{ form.buh }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.modified_date.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.modified_date }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+
+                        </div>
+                        <div class="col-xs-10">
+                            <input type="submit" value="Сохранить" class="btn btn-success" style="width: 175px;">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

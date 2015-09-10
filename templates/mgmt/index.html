@@ -1,0 +1,70 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load tags %}
+{% load staticfiles %}
+{% load webdesign %}
+{% block content %}
+    <!-- Main admin panel index page -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1>Последние заказы</h1>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>Номер</th>
+                            <th>Клиент</th>
+                            <th>Сумма</th>
+                            <th>Статус</th>
+                            <th>Дата изменения</th>
+                        </tr>
+                        <!-- Table content (Order list) -->
+                        {% for order in last_orders %}
+                            <tr>
+                                <td><a href="{% url 'orders-edit' order.pk %}"> {{ order.pk }} </a></td>
+                                <td><a href="{% url 'clients-edit' order.client.pk %}"> {{ order.client }} </a></td>
+                                <td> {{ order.order_sum }}</td>
+                                <td>{{ order.get_status_display }} </td>
+                                <td> {{ order.modified_date }} </td>
+                            </tr>
+                        {% endfor %}
+                        <!-- END TABLE CONTENT -->
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1>Последние заригистрировавшиеся пользователи</h1>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>Имя</th>
+                            <th>Логин</th>
+                            <th>Дата регистрации</th>
+                            <th>Сумма заказов</th>
+                            <th>Контактный email</th>
+                        </tr>
+                        <!-- Table content (Last registered users list) -->
+                        {% for client in last_clients %}
+                            <tr>
+                                <td><a href="{% url 'clients-edit' client.pk %}"> {{ client.title }}</a> </td>
+                                <td> {{ client.login }} </td>
+                                <td> {{ client.registration_date }}</td>
+                                <td> {{ client.orders_sum }} </td>
+                                <td> {{ client.contact_email }} </td>
+                            </tr>
+                        {% endfor %}
+                        <!-- END TABLE CONTENT -->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

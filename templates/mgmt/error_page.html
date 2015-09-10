@@ -1,0 +1,20 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Error page -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Произошла ошибка</h1>
+                <h2>Обратитесь к администратору</h2>
+                <p>{{ error }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

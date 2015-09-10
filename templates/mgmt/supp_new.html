@@ -1,0 +1,44 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Create supplier -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                    <h1>Добавить поставщика</h1>
+                <form action="." method="post">
+                    <ul>
+                        {% csrf_token %}
+                        {{ form.title.label }}
+                        {{ form.title }}
+                        <br>
+                        {{ form.bank_data.label }}
+                        {{ form.bank_data }}
+                        <br>
+                        {{ form.law_address.label }}
+                        {{ form.law_address }}
+                        <br>
+                        {{ form.fact_address.label }}
+                        {{ form.fact_address }}
+                        <br>
+                        {{ form.contact.label }}
+                        {{ form.contact }}
+                        <br>
+                        {{ form.contact_phone.label }}
+                        {{ form.contact_phone }}
+                        <br>
+                        {{ form.contact_email.label }}
+                        {{ form.contact_email }}
+                    </ul>
+                    <input type="submit" value="Сохранить" class="btn btn-danger">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

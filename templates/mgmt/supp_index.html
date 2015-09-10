@@ -1,0 +1,46 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show list of suppliers section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Управление поставщиками и товарами.</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <h2>Поставщики</h2>
+                <a href="{% url 'supp-list' %}" class="btn btn-primary">Изменить</a>
+            </div>
+            <div class="col-xs-4">
+                <h2>Прайс-листы</h2>
+                <a href="{% url 'price-list' %}" class="btn btn-primary">Изменить</a>
+            </div>
+            <div class="col-xs-4">
+                <h2>Торговая наценка</h2>
+                <a href="{% url 'markup-list' %}" class="btn btn-primary">Изменить</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <h2>Акции</h2>
+                <a href="{% url 'stock-list' %}" class="btn btn-primary">Изменить</a>
+            </div>
+            <div class="col-xs-4">
+                <h2>Товары</h2>
+                <a href="{% url 'goods-list' %}" class="btn btn-primary">Изменить</a>
+            </div>
+            <div class="col-xs-4">
+                <h2>Выгрузка в 1С</h2>
+                <a href="{% url 'export-goods-list' %}" class="btn btn-primary">Изменить</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

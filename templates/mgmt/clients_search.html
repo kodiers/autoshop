@@ -1,0 +1,89 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Управление заказами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show goods list -->
+    <div class="container">
+        <div class="col-xs-12">
+            <a href="{% url 'clients-list' %}" class="btn btn-primary">К списку клиентов</a>
+            <br>
+            <form class="navbar-form navbar-left" role="search" action="{% url 'clients-search' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Поиск" name="word">
+                </div>
+                <button type="submit" class="btn btn-default">Поиск</button>
+            </form>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>Клиенты</h1>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Логин</th>
+                        <th>Название</th>
+                        <th>Контактный телефон</th>
+                        <th>Email</th>
+                        <th>Сумма заказов</th>
+                        <th>Задолженность</th>
+                        <th>Неоплаченные заказы</th>
+                        <th></th>
+                    </tr>
+                    {% for object in object_list %}
+                        <tr>
+                            <td><a href="{% url 'clients-edit' object.pk %}"> {{ object.login }}</a></td>
+                            <td>{{ object.title }}</td>
+                            <td>{{ object.contact_phone }}</td>
+                            <td>{{ object.contact_email }}</td>
+                            <td>{{ object.orders_sum }}</td>
+                            <td>{{ object.unpaid_sum }}</td>
+                            <td>{{ object.unpaid_orders }}</td>
+                            <td><a href="{% url 'clients-delete' object.pk %}" class="btn btn-danger">Удалить</a> </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End goods list -->
+    <!-- Begin pagination -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12" style="text-align: center">
+                {% if object_list.paginator.num_pages > 1 %}
+                    <nav>
+                        <ul class="pagination">
+                            {% for page in object_list.paginator.page_range %}
+                                {% if page < object_list.number %}
+                                    <li>
+                                        <a href="/mgmt/clients-search?page={{ page }}">
+                                            <span aria-hidden="true">{{ page }}</span>
+                                            <span class="sr-only">{{ page }}</span>
+                                        </a>
+                                    </li>
+                                    {% elif page == object_list.number %}
+                                    <li class="active">
+                                        <a href="#">{{ page }} <span class="sr-only">{{ page }}</span></a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="/mgmt/clients-search?page={{ page }}">
+                                            <span aria-hidden="true">{{ page }}</span>
+                                            <span class="sr-only">{{ page }}</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- End pagination -->
+{% endblock %}

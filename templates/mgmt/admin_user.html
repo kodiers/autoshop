@@ -1,0 +1,53 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Администрирование.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show users list -->
+    <div class="container">
+        <div class="col-xs-12">
+            <div style="text-align: right; margin-top: 20px">
+                <a href="{% url 'admin-add' %}" class="btn btn-primary">Добавить пользователя</a>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>Пользователи</h1>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Логин</th>
+                        <th>E-mail</th>
+                        <th>Группа</th>
+                        <th>Суперпользователь</th>
+                        <th>Время последнего входа</th>
+                        <th></th>
+                    </tr>
+                    {% for user in users %}
+                        <tr>
+                            <td><a href="{% url 'user-edit' user.pk %}"> {{ user.username }}</a></td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {%  for group in user.groups.all %}
+                                    {{ group.name }}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% if user.is_superuser %}
+                                    X
+                                {% endif %}
+                            </td>
+                            <td>{{ user.last_login }}</td>
+                            <td><a href="{% url 'delete-user' user.pk %}" class="btn btn-danger">Удалить</a> </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End bills list -->
+{% endblock %}

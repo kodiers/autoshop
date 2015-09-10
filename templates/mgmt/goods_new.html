@@ -1,0 +1,171 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Create goods  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                    <h1>Добавить товар</h1>
+                <hr>
+                {% if error %}
+                    <h3>{{ error }}</h3>
+                {% endif %}
+                {{ object }}
+                <form action="." method="post">
+                        {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.category.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.category }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.developer.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.developer }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.partnumber.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.partnumber }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.title.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.title }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.description.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.description }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.show_on_index.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.show_on_index }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.remainder.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.remainder }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.reserved.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.reserved }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.delivery_time.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.delivery_time }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.meassure.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.meassure }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.price.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.price }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.cost.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.cost }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.supplier.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="form_title">
+                                {{ form.supplier }}
+                            </div>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.stock_price.label }}
+                        </div>
+                        <div class="col-xs-10">
+                                {{ form.stock_price }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+
+                        </div>
+                        <div class="col-xs-10">
+                            <input type="submit" value="Сохранить" class="btn btn-success" style="width: 175px;">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

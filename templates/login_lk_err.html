@@ -1,0 +1,9 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <p>{{ error }}</p>
+    <p>или воспользуйтесь формой <a href="{% url 'restore_password' %}"> восстановления пароля</a></p>
+{% endblock %}

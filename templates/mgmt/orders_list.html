@@ -1,0 +1,99 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Управление заказами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show orders list -->
+    <div class="container">
+        <div class="col-xs-12">
+            <div class="panel panel-default" style="margin-top: 20px">
+                <div class="panel-heading">
+                    <h1>Заказы</h1>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th style="width: 15%; text-align: center">Номер</th>
+                        <th style="width: 35%; text-align: center">Клиент</th>
+                        <th style="width: 10%; text-align: center">Статус заказа</th>
+                        <th style="width: 10%; text-align: center">Статус платежа</th>
+                        <th style="width: 10%; text-align: center">Сумма</th>
+                        <th style="width: 10%; text-align: center">Дата изменения</th>
+                        <th style="width: 10%; text-align: center"></th>
+                    </tr>
+                    {% for object in object_list %}
+                        <tr>
+                            <td style="width: 15%; text-align: left"><a href="{% url 'orders-edit' object.pk %}"> {{ object.pk }}</a></td>
+                            <td style="width: 15%; text-align: left">{{ object.client }}</td>
+                            <td style="width: 15%; text-align: center">{{ object.get_status_display }}</td>
+                            <td style="width: 15%; text-align: center">{% if object.payment_status == False %}
+                                    Не оплачено
+                                {% else %}
+                                    Оплачено
+                                {% endif %}
+                            </td>
+                            <td style="width: 15%; text-align: right">{{ object.order_sum }}</td>
+                            <td style="width: 15%; text-align: center">{{ object.modified_date }}</td>
+                            <td style="width: 15%; text-align: right"><a href="{% url 'orders-delete' object.pk %}" class="btn btn-danger">Удалить</a> </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End clients list -->
+    <!-- Begin pagination -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12" style="text-align: center">
+                {% if paginator.num_pages > 1 %}
+                    <nav>
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li>
+                                    <a href="/mgmt/orders-list?page=1">
+                                        <span aria-hidden="true">В начало</span>
+                                        <span class="sr-only">В начало</span>
+                                    </a>
+                                </li>
+                                <li>
+                                        <span aria-hidden="true">...</span>
+                                </li>
+                                <li>
+                                    <a href="/mgmt/orders-list?page={{ page_obj.previous_page_number }}">
+                                        <span aria-hidden="true">{{ page_obj.previous_page_number }}</span>
+                                        <span class="sr-only">{{ page_obj.previous_page_number }}</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="active">
+                                <a href="#">Страница {{ page_obj.number }} из {{ paginator.num_pages }} <span class="sr-only"></span></a>
+                            </li>
+                            {% if page_obj.has_next %}
+                                <li>
+                                    <a href="/mgmt/orders-list?page={{ page_obj.next_page_number }}">
+                                        <span aria-hidden="true">{{ page_obj.next_page_number }}</span>
+                                        <span class="sr-only">{{ page_obj.next_page_number }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                        <span aria-hidden="true">...</span>
+                                </li>
+                                <li>
+                                    <a href="/mgmt/orders-list?page={{ paginator.num_pages }}">
+                                        <span aria-hidden="true">В конец</span>
+                                        <span class="sr-only">В конец</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- End pagination -->
+{% endblock %}

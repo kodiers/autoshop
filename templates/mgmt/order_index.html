@@ -1,0 +1,38 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление заказами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show list of suppliers section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Управление заказами.</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <h2>Клиенты</h2>
+                <a href="{% url 'clients-list' %}" class="btn btn-primary">Изменить</a>
+            </div>
+            <div class="col-xs-6">
+                <h2>Заказы</h2>
+                <a href="{% url 'orders-list' %}" class="btn btn-primary">Изменить</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <h2>Счета</h2>
+                <a href="{% url 'bills-list' %}" class="btn btn-primary">Изменить</a>
+            </div>
+            <div class="col-xs-4">
+                <h2>Выгрузка в 1С</h2>
+                <a href="{% url 'export-orders-list' %}" class="btn btn-primary">Изменить</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "base.html" %}
+{% load webdesign %}
+{% load staticfiles %}
+{% block title %}Интернет-магазин Синкай авто.{% endblock %}
+{% block content %}
+
+<!-- Content -->
+<div class="col-xs-10">
+    <h1>Оплата произведена.</h1>
+    <p><a href="{% url 'index'%}" class="btn btn-primary">Продолжить покупки</a> </p>
+</div>
+
+<!-- Content END -->
+
+{% endblock %}

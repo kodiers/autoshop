@@ -1,0 +1,6 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% for page in pages %}
+    <a href="{% url 'page' page.url %}">{{ page.title }}</a><br>
+{% endfor %}

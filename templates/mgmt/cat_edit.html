@@ -1,0 +1,67 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- edit category  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                    <h1>Изменить категорию</h1>
+                {% if error %}
+                    <h3>{{ error }}</h3>
+                {% endif %}
+                <form action="." method="post">
+                    <ul>
+                        {% csrf_token %}
+                        {{ form.title.label }}
+                        {{ form.title }}
+                    </ul>
+                    <br>
+                    <input type="submit" value="Сохранить" class="btn btn-danger">
+                </form>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#add_goods" aria-expanded="false">
+                                        Добавить товары
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="add_goods" class="panel panel-collapse collapse" aria-expanded="false">
+                                <div class="panel-body">
+                                    <form action="{% url 'cat-add-goods' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="text" name="word" placeholder="Поиск">
+                                        <input type="hidden" name="id_category" value="{{ object.pk }}">
+                                        <input type="submit" value="Поиск" class="btn btn-primary">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <th>Артикул</th>
+                                <th>Название</th>
+                                <th></th>
+                            </tr>
+                            {% for good in goods %}
+                                <tr>
+                                    <td>{{ good.partnumber }}</td>
+                                    <td>{{ good.title }}</td>
+                                    <td><a href="{% url 'cat-del-goods' good.pk %}" class="btn btn-danger">Удалить товар</a> </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

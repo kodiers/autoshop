@@ -1,0 +1,115 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show goods list -->
+    <div class="container">
+        <div class="col-xs-12">
+            <div style="text-align: right">
+                <a href="{% url 'goods-dev-cat' %}" class="btn btn-primary">Список производителей и категорий</a>
+            </div>
+            <br>
+            <div>
+                <form class="navbar-form navbar-left" role="search" action="{% url 'goods-mgmt-search' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div style="text-align: left">
+                            <input type="text" class="form-control" placeholder="Поиск" name="word">
+                            <button type="submit" class="btn btn-default">Поиск</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <a href="{% url 'goods-new' %}" role="button" class="btn btn-primary" style="text-align: right; margin-top: 7px">Добавить товар</a>
+            </div>
+            <br>
+            <br><br>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>Товары</h1>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Артикул</th>
+                        <th>Название</th>
+                        <th>Остаток</th>
+                        <th>Стоимость</th>
+                        <th>Цена</th>
+                        <th>Цена по акции</th>
+                        <th></th>
+                    </tr>
+                    {% for object in object_list %}
+                        <tr>
+                            <td><a href="{% url 'goods-edit' object.pk %}"> {{ object.partnumber }}</a></td>
+                            <td>{{ object.title }}</td>
+                            <td>{{ object.remainder }}</td>
+                            <td>{{ object.cost }}</td>
+                            <td>{{ object.price }}</td>
+                            <td>{{ object.stock_price }}</td>
+                            <td><a href="{% url 'goods-delete' object.pk %}" class="btn btn-danger">Удалить</a> </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End goods list -->
+    <!-- Begin pagination -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12" style="text-align: center">
+                {% if paginator.num_pages > 1 %}
+                    <nav>
+                        <ul class="pagination">
+{#                            {% if paginator.page.has_previous %}#}
+                            {% if page_obj.has_previous %}
+                                <li>
+                                    <a href="/mgmt/goods-list?page=1">
+                                        <span aria-hidden="true">В начало</span>
+                                        <span class="sr-only">В начало</span>
+                                    </a>
+                                </li>
+                                <li>
+                                        <span aria-hidden="true">...</span>
+                                </li>
+                                <li>
+                                    <a href="/mgmt/goods-list?page={{ page_obj.previous_page_number }}">
+                                        <span aria-hidden="true">{{ page_obj.previous_page_number }}</span>
+                                        <span class="sr-only">{{ page_obj.previous_page_number }}</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="active">
+                                <a href="#">Страница {{ page_obj.number }} из {{ paginator.num_pages }} <span class="sr-only"></span></a>
+                            </li>
+                            {% if page_obj.has_next %}
+                                <li>
+                                    <a href="/mgmt/goods-list?page={{ page_obj.next_page_number }}">
+                                        <span aria-hidden="true">{{ page_obj.next_page_number }}</span>
+                                        <span class="sr-only">{{ page_obj.next_page_number }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                        <span aria-hidden="true">...</span>
+                                </li>
+                                <li>
+                                    <a href="/mgmt/goods-list?page={{ paginator.num_pages }}">
+                                        <span aria-hidden="true">В конец</span>
+                                        <span class="sr-only">В конец</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- End pagination -->
+{% endblock %}

@@ -1,0 +1,25 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Contacts -->
+    <div class="col-xs-10" style="background-color: #ffffff">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Контактная информация</h1>
+                <p>Телефон: {{ contact_page.phone }}</p>
+                <h2>Адрес: </h2>
+                <p>{{ contact_page.zip }} &nbsp; {{ contact_page.address }} </p>
+                <p>Электронный адрес: {{ contact_page.email }}</p>
+                <h3>Наш офис: </h3>
+                <p>{{ contact_page.map|safe }}</p>
+                <p>{{ contact_page.comments }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

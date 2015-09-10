@@ -1,0 +1,88 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Step 1. Private office -->
+    <div class="col-xs-10" style="background-color: #ffffff">
+        <div class="row">
+            <div class="col-xs-4" style="text-align: left">
+                    <h1>Личный кабинет</h1>
+            </div>
+            <div class="col-xs-8" style="text-align: right">
+                <h1><a href="{% url 'lk-edit-client' %}" class="btn btn-info">Изменить личные данные</a></h1>
+            </div>
+        </div>
+        <div class="row">
+
+                <div class="col-xs-12" style="text-align: center">
+                    <h4>Здравствуйте, <b>{{ client.title }}</b></h4>
+                </div>
+
+        </div>
+
+        {%  if error %}
+            <h2>{{ error }}</h2>
+        {% endif %}
+        <div class="row">
+            <div class="col-xs-8">
+                <h4>Размер вашей персональной скидки:</h4>
+            </div>
+            <div class="col-xs-4">
+                <h4>{{ client.private_stock }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8">
+                <h4>Размер вашей задолженности:</h4>
+            </div>
+            <div class="col-xs-4">
+                <h4 style="color: red">{{ client.unpaid_sum }} руб.</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8">
+                <h4>Количество неоплаченных заказов:</h4>
+            </div>
+            <div class="col-xs-4">
+                <h4 style="color: red">{{ client.unpaid_orders }}</h4>
+            </div>
+        </div>
+
+        <small>Размер скидки не учитывается на товары по акции</small>
+        <div class="row">
+            <div class="col-xs-12">
+                <h4>Последние заказы</h4>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>№</th>
+                        <th>Статус заказа</th>
+                        <th>Статус платежа</th>
+                        <th style="text-align: right">Сумма (руб.)</th>
+                        <th style="text-align: right">Дата</th>
+                    </tr>
+                    {% for order in orders %}
+                        <tr>
+                            <td><a href="{% url 'lk-order' order.pk %}"> {{ order.pk }}</a></td>
+                            <td>{{ order.get_status_display }}</td>
+                            <td>
+                                {% if order.payment_status == False %}
+                                    Не оплачено
+                                {% else %}
+                                    Оплачено
+                                {% endif %}
+                            </td>
+                            <td style="text-align: right">{{ order.order_sum }}</td>
+                            <td style="text-align: right">{{order.created_date }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

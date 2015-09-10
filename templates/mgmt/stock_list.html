@@ -1,0 +1,43 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show actions list -->
+    <div class="container">
+        <div class="col-xs-12">
+            <div style="text-align: right">
+                <a href="{% url 'stock-new' %}" class="btn btn-primary">Создать акцию</a>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>Акции</h1>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Название</th>
+                        <th>Размер скидки</th>
+                        <th>Показывать на главной</th>
+                        <th>Дата изменения</th>
+                        <th></th>
+                    </tr>
+                    {% for object in object_list %}
+                        <tr>
+                            <td><a href="{% url 'stock-edit' object.pk %}"> {{ object.title }}</a></td>
+                            <td>{{ object.value }}</td>
+                            <td>{{ object.show_on_main_page }}</td>
+                            <td>{{ object.modified_date }}</td>
+                            <td><a href="{% url 'stock-delete' object.pk %}" class="btn btn-danger">Удалить</a> </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End markup list -->
+{% endblock %}

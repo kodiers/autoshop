@@ -1,0 +1,40 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show suppliers list -->
+    <div class="container">
+        <div class="col-xs-12">
+            <div style="text-align: right">
+                <a href="{% url 'supp-new' %}" class="btn btn-primary">Добавить поставщика</a>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>Список поставщиков</h1>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th style="width: 30%">Название</th>
+                        <th style="width: 30%">Контактное лицо</th>
+                        <th style="width: 30%">Контактный телефон</th>
+                        <th style="width: 10%"></th>
+                    </tr>
+                    {% for object in object_list %}
+                        <tr>
+                            <td style="width: 30%"><a href="{% url 'supp-edit' object.pk %}">{{ object.title }}</a></td>
+                            <td style="width: 30%">{{ object.contact }}</td>
+                            <td style="width: 30%">{{ object.contact_phone }}</td>
+                            <td style="width: 10%"><a href="{% url 'supp-delete' object.pk %}" class="btn btn-danger">Удалить</a> </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

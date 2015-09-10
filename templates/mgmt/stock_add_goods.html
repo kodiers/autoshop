@@ -1,0 +1,32 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Add goods to stock  -->
+    <!-- Not used in this version -->
+{#    TODO: create add goods to stock form #}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Добавить товары к акции</h1>
+                {% if error %}
+                    <h3>{{ error }}</h3>
+                {% endif %}
+                {{ new_stock.title }}
+                <form action="." method="post">
+                    <ul>
+                        {% csrf_token %}
+
+                    </ul>
+                    <br>
+                    <input type="submit" value="Сохранить" class="btn btn-danger">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

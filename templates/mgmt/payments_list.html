@@ -1,0 +1,36 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Администрирование.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show payments method list -->
+    <div class="container">
+        <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h3>Методы оплаты</h3>
+                        </div>
+                    </div>
+                </div>
+                <!--<a href="{% url 'payments-new' %}" class="btn btn-primary">Добавить</a>-->
+                <table class="table">
+                    
+                    {% for object in object_list %}
+                        <tr>
+                            <td><a href="{% url 'payments-edit' object.pk %}"> {{ object.title }}</a></td>
+                            <!--<td><a href="{% url 'payments-delete' object.pk %}" class="btn btn-danger">Удалить</a> </td>-->
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

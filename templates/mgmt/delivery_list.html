@@ -1,0 +1,42 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'mgmt/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Администрирование.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Show delivery list -->
+    <div class="container">
+        <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h3>Методы доставки</h3>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <table class="table">
+                    <tr>
+                        <th>Название</th>
+                        <th style="text-align: right">Стоимость</th>
+                        <th></th>
+                    </tr>
+                    {% for object in object_list %}
+                        <tr>
+                            <td><a href="{% url 'delivery-edit' object.pk %}"> {{ object.title }}</a></td>
+                            <td style="text-align: right">{{ object.cost }} руб.</td>
+                            <td style="text-align: right"><a href="{% url 'delivery-delete' object.pk %}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </a> </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

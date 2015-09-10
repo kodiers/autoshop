@@ -1,0 +1,143 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% load staticfiles %}
+{% load tags %}
+<!DOCTYPE html>
+<html ng-app xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{% block title %}Админ-панель. Интернет магазин Синкай-авто{% endblock %}</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="{% static 'js/jquery.arcticmodal-0.3.min.js' %}"></script>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/jquery.arcticmodal-0.3.css' %}" rel="stylesheet">
+    <link href="{%  static 'css/simple.css' %}" rel="stylesheet">
+    <link href="{% static 'css/modalCSS.css' %}" rel="stylesheet">
+    <script src="{% static 'js/modalJS.js' %}"></script>
+</head>
+<body>
+<!-- Header -->
+
+
+
+<div id="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="logo"><a href="{% url 'mgmt_index' %}">
+                    <img src={% static 'images/logo.png' %}>
+                </a>
+                </div>
+            </div>
+
+            <div class="col-xs-8">
+                <div class="menu">
+
+
+                                <a href="{% url 'mgmt_index' %}"><button class="btn btn-default">Домой</button></a>
+
+                            <div class="btn-group">
+                                <button href="{% url 'pages-index' %}" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Страницы сайта</button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{% url 'forsuppliers-edit' 1 %}" >Поставщикам</a></li>
+                                    <li><a href="{% url 'deliveryinfo-edit' 1 %}" >Доставка и оплата</a></li>
+                                    <li><a href="{% url 'contacts-edit' 1 %}" >Контакты</a></li>
+                                    <li><a href="{% url 'aboutcompany-edit' 1 %}" >О компании</a></li>
+                                    <li class="divider">-</li>
+                                    <li><a href="{% url 'pages-list' %}" >Дополнительные страницы</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url 'faq-edit-list' %}">Помощь</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <button href="{% url 'supp-index' %}" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Работа с поставщиками</button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li> <a href="{% url 'supp-list' %}">Список поставщиков</a></li>
+                                    <li><a href="{% url 'price-list' %}">Прайс листы</a></li>
+                                    <li><a href="{% url 'markup-list' %}">Торговые наценки</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url 'stock-list' %}">Акции</a></li>
+                                    <li><a href="{% url 'goods-list' %}">Товары</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url 'export-goods-list' %}">Выгрузка в 1С</a></li>
+                                    <li><a href="{% url 'client-price-cat' %}">Список категорий цены</a> </li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <button href="{% url 'order-index' %}" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Работа с заказами</button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{% url 'orders-list' %}">Заказы</a></li>
+                                    <li><a href="{% url 'bills-list' %}">Счета</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url 'clients-list' %}">Список клиентов</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url 'export-orders-list' %}">Выгрузка в 1С</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Администрирование</button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{% url 'user-list' %}">Управление пользователями</a></li>
+                                    <li><a href="{% url 'delivery-list' %}">Методы доставки</a> </li>
+                                    <li><a href="{% url 'payments-list' %}">Методы оплаты</a> </li>
+                                    <li><a href="{% url 'load_photos' %}">Загрузить фотографии</a> </li>
+                                    <!-- Commented for future use <li><a href="#">управление группами</a></li>  -->
+                                    <li>
+                                            <a href="{% url 'logout' %}">Выйти</a>
+                                    </li>
+                                </ul>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Header END -->
+
+<!-- Middle -->
+<div id="middle">
+    <hr style="border: 0; margin: 0; color: brown; height: 5px; background-color: brown; margin-top: -20px; margin-bottom: 40px;">
+    <div class="container" style="margin-bottom: 100px;">
+            <!-- Left sidebar -->
+
+            <!-- Left sidebar END -->
+            {% block content %}{% endblock %}
+    </div>
+</div>
+<!-- Footer-->
+<div style="width: 100%; bottom: 0; position: absolute;">
+    <div class="footer">
+        <div class="container" >
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-8" id="studio">
+                            <p><a href="http://it-national.com">Designed & Developed by Quantum</a></p>
+                        </div>
+                        <div class="col-xs-4">
+                            {% show_contacts %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer END -->
+
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/jquery-2.1.3.js' %}"></script>
+</wrapper>
+</body>
+</html>
+
+
+<!-- END BLOCK -->
+
+

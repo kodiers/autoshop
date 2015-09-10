@@ -1,0 +1,95 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление заказами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- View order  -->
+    <div class="col-xs-10" style="background-color: #ffffff">
+        <div class="row">
+            <div class="col-xs-12">
+                <!--<h1>Просмотреть заказ {{ order.pk }}</h1>-->
+                {% if error %}
+                    <h3>{{ error }}</h3>
+                {% endif %}
+                <h2><a href="{% url 'lk' %}" class="btn btn-primary" style="margin-right: 20px"><span class="glyphicon glyphicon-menu-left"></span></a>Номер заказа {{ order.pk }}</h2>
+                    <ul>
+                        <li>
+                            <p>Сумма заказа: <b>{{ order.order_sum }}</b> руб.</p>
+                        </li>
+                        <li>
+                            Статус заказа: {{ order.get_status_display }}
+                        </li>
+                        <li>
+                            Заказ оплачен:
+                            {% if order.payment_status == False %}
+                                    Не оплачен
+                                {% else %}
+                                    Оплачен
+                                {% endif %}
+                        </li>
+                        <li>
+                            Тип оплаты: {{ order.payments }}
+                            {% if order.payments.id_method == 'robo' and order.payment_status == False %}
+                                <form action="{{ form.target }}" method="POST">
+                                    <p>{{ form.as_p }}</p>
+                                    <p><input type="submit" value="Оплатить" class="btn btn-success"></p>
+                                </form>
+                            {% endif %}
+                            {% if order.payments.id_method == 'bill' %}
+                                <a href="{% url 'bill-show' bill.pk %}" target="_blank">Распечатать счет</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            Тип доставки: {{ order.delivery }}
+                        </li>
+                        {% if order.delivery.id_method == 'kur' %}
+                            <li>
+                                <h3>Адрес доставки: </h3>
+                                {{ order.delivery_zip }} &nbsp;{{ order.delivery_city }}&nbsp;{{ order.delivery_street }}
+                                &nbsp;{{ order.delivery_home }}&nbsp;{{ order.delivery_office }}
+                            </li>
+                        {% endif %}
+                        <li>
+                            Заказ создан: {{ order.created_date }}
+                        </li>
+                        <li>
+                            Заказ изменен: {{ order.modified_date }}
+                        </li>
+                    </ul>
+                    <br>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Детали заказа</h2>
+                <!-- Show orderdetails for order -->
+                <table class="table">
+                    <tr>
+                        <th>Артикул</th>
+                        <th>Наименование</th>
+                        <th style="text-align: center">Количество</th>
+                        <th>Цена (руб.)</th>
+                        <th>Сумма (руб.)</th>
+                    </tr>
+                    {% for detail in order_details %}
+                        <tr>
+                            <td>{{ detail.goods_pn }}</td>
+                            <td>{{ detail.goods }}</td>
+                            <td style="text-align: center">
+                                    {{ detail.quantity }}
+                            </td>
+                            <td>{{ detail.goods_price }}</td>
+                            <td>{{ detail.total_goods_price }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <!-- End show -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

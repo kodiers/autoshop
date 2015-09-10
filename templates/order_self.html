@@ -1,0 +1,61 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Order saved. -->
+    <div class="col-xs-10" style="background-color: #FFFFFF">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Ваш заказ оформлен</h1>
+            </div>
+        </div>
+        <div class="row">
+            {%  if error %}
+                <h2>{{ error }}</h2>
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                Ваш заказ был упешно оформлен.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <h4>Общая сумма заказа:&nbsp;{{ total_summ }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <h4>Выбранный метод доставки: {{ delivery }}</h4>
+                <p>{{ delivery.description|safe }}</p>
+            </div>
+            <div class="col-xs-6">
+                <h4>Выбранный метода платежа: {{ payment }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                {% if payment.id_method == 'cash' %}
+                    <a href="{% url 'index' %}" class="btn btn-primary">Продолжить покупки</a>
+                {% elif payment.id_method == 'bill'%}
+                    <a href="{% url 'bill-show' bill.pk %}" target="_blank">Распечатать счет</a>
+                    <br>
+                    <a href="{% url 'index' %}" class="btn btn-primary">Продолжить покупки</a>
+                {% else %}
+                    <form action="{{ form.target }}" method="POST">
+                        <p>{{ form.as_p }}</p>
+                        <p><input type="submit" value="Купить" class="btn btn-success"></p>
+                    </form>
+                    <br>
+                    <a href="{% url 'index' %}" class="btn btn-primary">Продолжить покупки</a>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

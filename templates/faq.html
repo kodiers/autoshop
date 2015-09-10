@@ -1,0 +1,22 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- For suppliers -->
+    <div class="col-xs-10" style="background-color: #ffffff">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Помощь</h1>
+                {% for faq in faqs %}
+                    <h2>{{ faq.question }}</h2>
+                    <p>{{ faq.answer }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,79 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление поставщиками и товарами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- edit stock  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                    <h1>Изменить акцию</h1>
+                {% if error %}
+                    <h3>{{ error }}</h3>
+                {% endif %}
+                <form action="." method="post">
+                        {% csrf_token %}
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.title.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.title }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.goods_category.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.goods_category }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.developer.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.developer }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.value.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.value }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.show_on_main_page.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.show_on_main_page }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.modified_date.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.modified_date }}
+                        </div>
+                    </div>
+                    <br>
+                    <input type="submit" value="Сохранить" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

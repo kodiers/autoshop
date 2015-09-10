@@ -1,0 +1,227 @@
+{# encoding=utf-8 #}
+{# © Quantum Ltd. #}
+{# version 1.0.0 #}
+{% extends "mgmt/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Управление заказами.Интернет магазин Синкай-авто
+{% endblock %}
+{% block content %}
+    <!-- Create or edit clients  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h1>Изменить заказ</h1>
+                    </div>
+                    <div class="col-xs-6" style="text-align: right">
+                        <h1><a href="{% url 'orders-list' %}" class="btn btn-primary">Вернуться к списку заказов</a></h1>
+                    </div>
+                </div>
+
+                {% if error %}
+                    <h3>{{ error }}</h3>
+                {% endif %}
+                <div class="row">
+                    <div class="col-xs-2">
+                        Клиент:
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="form_title">
+                            {{ order.client }}
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Form for edit main order -->
+                <form action="." method="post">
+                    {% csrf_token %}
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h2>Номер заказа {{ order.pk }}</h2>
+                            </div>
+                            <div class="col-xs-6">
+                                <h2><b style="color: #ff0000; text-decoration: underline">Сумма заказа: {{ order.order_sum }}</b></h2>
+                            </div>
+                        </div>
+                        <input type="hidden" value="{{ order.pk }}" name="order">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                {{ form.delivery_zip.label }}
+                            </div>
+                            <div class="col-xs-10 form_title">
+                                {{ form.delivery_zip }}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-2">
+                                {{ form.delivery_city.label }}
+                            </div>
+                            <div class="col-xs-10 form_title">
+                                {{ form.delivery_city }}
+                            </div>
+                        </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.delivery_street.label }}
+                        </div>
+                        <div class="col-xs-10 form_title_ok_width">
+                            {{ form.delivery_street }}
+                        </div>
+                    </div>
+                         <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.delivery_home.label }}
+                        </div>
+                        <div class="col-xs-10 form_title">
+                            {{ form.delivery_home }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.delivery_office.label }}
+                        </div>
+                        <div class="col-xs-10 form_title">
+                            {{ form.delivery_office }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.status.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.status }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.payment_status.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.payment_status }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.payments.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.payments }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.delivery.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.delivery }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.comments.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.comments }}
+                        </div>
+                    </div>
+                        <br>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {{ form.modified_date.label }}
+                        </div>
+                        <div class="col-xs-10">
+                            {{ form.modified_date }}
+                        </div>
+                    </div>
+
+                    <br>
+                    <input type="submit" value="Сохранить" class="btn btn-success">
+                </form>
+                <!-- end form -->
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Детали заказа</h2>
+                <!-- Show orderdetails for order -->
+                {% if order.status == 0 or order.status == 1 %}
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#add_goods" aria-expanded="false">
+                                        Добавить товары
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="add_goods" class="panel panel-collapse collapse" aria-expanded="false">
+                                <div class="panel-body">
+                                    <form action="." method="post">
+                                        {% csrf_token %}
+                                        <input type="text" name="partnumber" placeholder="Введите артикул">
+                                        <input type="hidden" name="id_order" value="{{ order.pk }}">
+                                        <input type="submit" value="Добавить" class="btn btn-primary">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <table class="table">
+                    <tr>
+                        <th>Артикул</th>
+                        <th>название товара</th>
+                        <th>Количество</th>
+                        <th>Цена за единицу</th>
+                        <th>Сумма</th>
+                        <th></th>
+                    </tr>
+                    {% for detail in order_details %}
+                        <tr>
+                            <td>{{ detail.goods_pn }}</td>
+                            <td>{{ detail.goods }}</td>
+                            <td>{% if order.status == 0 or order.status == 1 %}
+                                    <form action="." method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{ detail.pk }}" name="order_detail">
+                                        <input type="number" name="quantity" value="{{ detail.quantity }}" pattern="^[0-9]+$">
+                                        <input type="submit" value="Сохранить" class="btn btn-primary">
+                                    </form>
+                                {% else %}
+                                    {{ detail.quantity }}
+                                {% endif %}
+                            </td>
+                            <td>{{ detail.goods_price }}</td>
+                            <td>{{ detail.total_goods_price }}</td>
+                            <td>
+                                {% if order.status == 0 or order.status == 1 %}
+                                    <form action="." method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{ detail.pk }}" name="delete_detail">
+                                        <input type="submit" value="Удалить" class="btn btn-danger">
+                                    </form>
+                                {% else %}
+                                    &nbsp;
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <!-- End show -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
