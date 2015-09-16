@@ -98,7 +98,7 @@ def org_registration_form(request):
                 email_subject = u"Регистрация на сайте Sinkai Auto"
                 email_message = u"""Здравствуйте! Вы зарегистрировались на сайте %(host)s \n
                     Ваш пароль: %(password)s \n Ваше имя пользователя: %(username)s. \n С уважением, \n
-                    Администрация интернет-магазина Синкай Авто""" % {'host': ALLOWED_HOSTS, 'password': password,
+                    Администрация интернет-магазина """ % {'host': ALLOWED_HOSTS, 'password': password,
                                                                       'username': new_client.login}
                 recipients = [user_object.email]
                 try:
@@ -162,7 +162,7 @@ def reg(request):
                     errors = u"Произошла ошибка при записи в базу"
                 email_subject = u"Регистрация на сайте Sinkai Auto"
                 email_message = u"""Здравствуйте! Вы зарегистрировались на сайте %(host)s \n Ваш пароль: %(password)s \n
-                Ваше имя пользователя: %(username)s. \n С уважением, \n Администрация интернет-магазина Синкай Авто""" \
+                Ваше имя пользователя: %(username)s. \n С уважением, \n Администрация интернет-магазина """ \
                                 % {'host': ALLOWED_HOSTS, 'password': password, 'username': new_client.login}
                 recipients = [user_object.email]
                 try:
@@ -259,7 +259,7 @@ def restore_password(request):
                 user.set_password(temp_password)
                 user.save()
                 email_subject = u"Запрос на восстановление пароля Sinkai Auto"
-                email_message = u"Здравствуйте! Вы запросили восстановление пароля на сайте %(host)s \n Ваш новый пароль: %(temp_password)s \n Вы можете изменить пароль на сайте в личном кабинете. \n С уважением, \n Администрация интернет-магазина Синкай Авто" % {
+                email_message = u"Здравствуйте! Вы запросили восстановление пароля на сайте %(host)s \n Ваш новый пароль: %(temp_password)s \n Вы можете изменить пароль на сайте в личном кабинете. \n С уважением, \n Администрация интернет-магазина" % {
                     'host': ALLOWED_HOSTS, 'temp_password': temp_password}
                 recipients = [user.email]
                 try:
@@ -2626,7 +2626,7 @@ def cash_order(request):
         email_subject2 = u"Пользователь оформил заказ на сайте"
         email_message = u"Здравствуйте! Оформлен заказ на сайте {host} № {order} \n Сумма: {summ} \n".format(
             summ=str(total_summ), order=str(order.pk), host=ALLOWED_HOSTS) + u"Позиции в заказе:\n" + \
-                        order_detail_message + u" С уважением, \n Администрация интернет-магазина Синкай Авто"
+                        order_detail_message + u" С уважением, \n Администрация интернет-магазина"
         email_message2 = u"Заказ № {order} \n Сумма {summ} \n Клиент {client} \n".format(order=str(order.pk),
                                                                                     summ=str(total_summ),
                                                                                     client=client.title) + \

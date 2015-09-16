@@ -32,8 +32,7 @@ technoprogress
         *-images
         *-jquery-ui
         *-js
-    *-sinkai        directory for main python project files
-        *-settings_hosting  directory for example hosting settings.py file
+    *-autoshop        directory for main python project files
     *-templates             directory with .html templates
         *-mgmt
         *-robokassa
@@ -50,18 +49,17 @@ STEPS:
 2. Run terminal
 3. Create postgresql user
 4. Start psql command (for run database shell)
-5. In the database shell enter: "CREATE DATABASE sinkaidb;"
-6. Delegate database user rights to the database 'sinkaidb'
-7. Create django project by command django-admin.py startproject sinkai
+5. In the database shell enter: "CREATE DATABASE YOUR_DB;"
+6. Delegate database user rights to the database 'YOUR_DB'
+7. Create django project by command django-admin.py startproject autoshop
 8. Create django application by running manage.py startapp shop
 9. Configure your web server and application server ti run project
 10. Copy files to project directory
-11. Copy settings from settings_hosting to main project directory
-12. Edit settings.py in STATICFILES_DIRS, MEDIA_URL, EMAIL_BACKEND, DATABASES, ROBOKASSA SETTINGS
-13. Run manage.py syncdb and create superuser
-14. Run manage.py makemigrations
-15. Run manage.py migrate
-16. Run manage.py shell < sinkai/install.py -- it's create superuser (admin/p@ssw0rd and all needed records in database)
-17. That's all :)
+11. Edit settings.py in STATICFILES_DIRS, MEDIA_URL, EMAIL_BACKEND, DATABASES, ROBOKASSA SETTINGS
+12. Run manage.py syncdb and create superuser
+13. Run manage.py makemigrations
+14. Run manage.py migrate
+15. Run manage.py shell < autoshop/install.py -- it's create superuser (admin/p@ssw0rd and all needed records in database)
+16. That's all :)
 
 ####################################
